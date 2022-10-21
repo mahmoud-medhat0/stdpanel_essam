@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class studentstoreRequest extends FormRequest
+class delstd extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class studentstoreRequest extends FormRequest
     public function rules()
     {
         return [
-//  
+            //
         ];
     }
 }

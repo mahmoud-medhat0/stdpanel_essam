@@ -77,11 +77,12 @@ Route::controller(exercise::class)->group(function (){
 });
 
 Route::controller(student::class)->group(function () {
-//     Route::get('dashboard', 'index')->name('dashboard');
      Route::get('std/std', 'read')->name('std');
      Route::get('std/add', 'add')->name('add');
-     Route::get('std/edit/{id}', 'edit')->name('edit');
-     Route::put('std/update/{id}', 'update')->name('update');
-     Route::delete('std/delete/{id}', 'delete')->name('delete');
+     Route::post('std/edit/', 'edit')->name('edit');
+     Route::put('std/update/', 'update')->name('update');
+     Route::delete('std/delete/', 'delete')->name('delete');
      Route::post('store_std', 'store')->name('store_std');
+     Route::get('std/m','read_m')->name('read_m');
+     Route::get('std/f','read_f')->name('read_f');
  });
