@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\studentstoreRequest;
 use App\Http\Requests\studentsupdateRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Unique;
 
 class student extends Controller
 {
@@ -39,6 +40,7 @@ class student extends Controller
         if ($request['gender'] =='m' ){
             $validate = [
                 'name'=>['required','max:255'],
+                'username'=>['required','max:255','unique:students_m,username'],
                 'phone'=>['required','regex:/^1[0-2,5]\d{8}$/','unique:students_m,phone'],
                 'p_phone'=>['required','regex:/^1[0-2,5]\d{8}$/'],
                 'verified'=>['required','in:0,1'],
@@ -47,6 +49,7 @@ class student extends Controller
             $request->validate($validate);
             DB::table('students_m')->insert([
                 'name' => $request['name'],
+                'username'=>$request['username'],
                 'phone' => $request['phone'],
                 'p_phone' => $request['p_phone'],
                 'verified' => $request['verified'],

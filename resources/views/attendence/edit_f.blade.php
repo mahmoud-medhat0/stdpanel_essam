@@ -105,6 +105,7 @@
                         <button class="btn btn-primary my-4"> save </button>
                     </div>
                 </center>
+                <input type="hidden" name="gender" value="f">
             </form>
             <script>
                 function myFunction() {

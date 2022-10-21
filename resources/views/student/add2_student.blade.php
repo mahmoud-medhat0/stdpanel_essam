@@ -31,6 +31,14 @@
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
+                            <input name="username" value="{{ old('username') }}" type="text" placeholder="username">
+                            @error('username')
+                            <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-6" bis_skin_checked="1">
+                        <div class="common_input mb_15" bis_skin_checked="1">
                             <input value="{{ old('phone') }}" type="number" name="phone" placeholder="phone">
                             @error('phone')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>

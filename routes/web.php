@@ -47,11 +47,15 @@ Route::controller(Admins::class)->group(function () {
 
 Route::controller(attendence::class)->group(function(){
     Route::get('attendence/new','new')->name('attendencenew');
+    Route::get('attendence/new/m','new_m')->name('add_attend_m');
+    Route::get('attendence/new/f','new_f')->name('add_attend_f');
     Route::get('attendence/list','attendlist')->name('attendlist');
+    Route::get('attendence/list/m','attendlist_m')->name('lst_attend_m');
+    Route::get('attendence/list/f','attendlist_f')->name('lst_attend_f');
     Route::post('attendence/edit','readattend')->name('readattend');
     Route::post('attendence/store','storeattend')->name('storeattend');
     Route::put('attendence/update','attendupdate')->name('attendupdate');
-    Route::delete('attendence/delete/{date}','attenddelete')->name('attenddelete');
+    Route::delete('attendence/delete/','attenddelete')->name('attenddelete');
 });
 
 Route::controller(theme::class)->group(function (){
@@ -61,7 +65,11 @@ Route::controller(theme::class)->group(function (){
 
 Route::controller(exam::class)->group(function (){
     Route::get('exam/list','examlist')->name('lstexm');
+    Route::get('exam/list/m','lst_exm_m')->name('lst_exm_m');
+    Route::get('exam/list/f','lst_exm_f')->name('lst_exm_f');
     Route::get('exam/add','add')->name('addexm');
+    Route::get('exam/add/m','add_m')->name('add_exm_m');
+    Route::get('exam/add/f','add_f')->name('add_exm_f');
     Route::post('exam/edit', 'readcexm')->name('editexm');
     Route::post('exam/update', 'examupdate')->name('examupdate');
     Route::post('exam/store','storeexm')->name('storeexm');
@@ -69,11 +77,15 @@ Route::controller(exam::class)->group(function (){
 });
 Route::controller(exercise::class)->group(function (){
     Route::get('exercise/list','exerciselist')->name('exerciselist');
+    Route::get('exercise/list/m','lst_exc_m')->name('lst_exc_m');
+    Route::get('exercise/list/f','lst_exc_f')->name('lst_exc_f');
     Route::get('exercise/add','exerciseadd')->name('exerciseadd');
+    Route::get('exercise/add/m','add_exc_m')->name('add_exc_m');
+    Route::get('exercise/add/f','add_exc_f')->name('add_exc_f');
     Route::post('exercise/edit', 'readexercise')->name('editexercise');
     Route::post('exercise/update', 'exerciseupdate')->name('exerciseupdate');
     Route::post('exercise/store','exercisestore')->name('exercisestore');
-    Route::delete('exercise/delete/{date}', 'exercisedelete')->name('deleteexercise');
+    Route::delete('exercise/delete/', 'exercisedelete')->name('deleteexercise');
 });
 
 Route::controller(student::class)->group(function () {

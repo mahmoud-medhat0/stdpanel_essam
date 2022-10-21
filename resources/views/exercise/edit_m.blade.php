@@ -1,5 +1,5 @@
 @extends('layouts.parent2')
-@section('title', 'Edit Exam Record')
+@section('title', 'Edit Exercise Record')
 @section('content')
     @include('messages.message')
     <div class="col-12" bis_skin_checked="1">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                <form action="{{route('examupdate')}}" method="POST">
+                <form action="{{route('exerciseupdate')}}" method="POST">
                     @csrf
                     <center> <label for="start">date:</label>
                         <input type="date" id="start" disabled name="" value="{{ $date }}">
@@ -68,9 +68,10 @@
                     </table>
                     <center>
                         <div class="create_report_btn mt_30" bis_skin_checked="1">
-                            <button class="btn btn-primary my-4"> save </button>
+                            <button class="btn btn-primary my-4"> update </button>
                         </div>
                     </center>
+                    <input type="hidden" name="gender" value="m">
                 </form>
                 <script>
                     function myFunction() {
@@ -105,4 +106,5 @@
                     }
                         </script>
     
+
             @endsection
