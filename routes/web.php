@@ -4,6 +4,7 @@ use App\Http\Controllers\Admins;
 use App\Http\Controllers\attendence;
 use App\Http\Controllers\exam;
 use App\Http\Controllers\exercise;
+use App\Http\Controllers\groups;
 use App\Http\Controllers\student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,7 @@ Route::controller(attendence::class)->group(function(){
     Route::post('attendence/store','storeattend')->name('storeattend');
     Route::put('attendence/update','attendupdate')->name('attendupdate');
     Route::delete('attendence/delete/','attenddelete')->name('attenddelete');
+    Route::post('attend/absent','absent_all')->name('absent_all');
 });
 
 Route::controller(theme::class)->group(function (){

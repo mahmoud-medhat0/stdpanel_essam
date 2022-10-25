@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\absentall;
 use App\Http\Requests\attendedit;
 use App\Http\Requests\attendstore;
 use App\Http\Requests\attendupdate;
@@ -43,7 +44,7 @@ class attendence extends Controller
             $attend = array();
             $payed = array();
             $reset = array();
-            $exercise = array();
+            $hw = array();
             $loop = array();
             for ($i = 0; $i < count($r); $i++) {
                 $a = explode("_", strval($r[$i]));
@@ -60,11 +61,16 @@ class attendence extends Controller
                 if ($a[0] == "reset") {
                     array_push($reset, $r[$i]);
                 }
-    
+                if ($a[0] == "hw") {
+                    array_push($hw, $r[$i]);
+                }
             }
             $validate = array();
             foreach ($attend as $attendq) {
                 $validate[$attendq]='required|in:0,1';
+            }
+            foreach ($hw as $hw1) {
+                $validate[$hw1]='require d|in:0,1';
             }
             foreach ($id as $idc) {
                 $validate[$idc] = 'required|exists:students_m,id';
@@ -95,20 +101,23 @@ class attendence extends Controller
                         'date' => $req['date'],
                         'attendence' => '0',
                         'payed' => '*',
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => '0'
                     ]);
                 }
                 if ($req['attend_'.strval($lp)] == '1'){
                     $validate1 = array();
                     $validate1['payed_'.strval($lp)] = 'required|integer';
                     $validate1['attend_'.strval($lp)] = 'required|in:0,1';
+                    $validate1['hw_'.strval($lp)] = 'required|in:0,1';
                     $req->validate($validate1);
                     DB::table('attendence_m')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
                         'attendence' => '1',
                         'payed' => $req['payed_'.strval($lp)],
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => $req['hw_'.strval($lp)]
                     ]);
                 }
     
@@ -178,20 +187,23 @@ class attendence extends Controller
                         'date' => $req['date'],
                         'attendence' => '0',
                         'payed' => '*',
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => '0'
                     ]);
                 }
                 if ($req['attend_'.strval($lp)] == '1'){
                     $validate1 = array();
                     $validate1['payed_'.strval($lp)] = 'required|integer';
                     $validate1['attend_'.strval($lp)] = 'required|in:0,1';
+                    $validate1['hw_'.strval($lp)] = 'required';
                     $req->validate($validate1);
                     DB::table('attendence_f')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
                         'attendence' => '1',
                         'payed' => $req['payed_'.strval($lp)],
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => $req['hw_'.strval($lp)]
                     ]);
                 }
     
@@ -300,19 +312,22 @@ class attendence extends Controller
                     $update->update([
                         'attendence' => '0',
                         'payed' => '*',
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => '0'
                     ]);
                 }
                 if ($req['attend_'.strval($lp)] == '1'){
                     $validate1 = array();
                     $validate1['payed_'.strval($lp)] = 'required|integer';
                     $validate1['attend_'.strval($lp)] = 'required|in:0,1';
+                    
                     $req->validate($validate1);
                     $update= DB::table('attendence_m')->where('id','=',$idrecord);
                     $update->update([
                         'attendence' => '1',
                         'payed' => $req['payed_'.strval($lp)],
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => $req['hw_'.strval($lp)]
                     ]);         
                 }
             }
@@ -374,7 +389,8 @@ class attendence extends Controller
                     $update->update([
                         'attendence' => '0',
                         'payed' => '*',
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => '0'
                     ]);
                 }
                 if ($req['attend_'.strval($lp)] == '1'){
@@ -386,12 +402,25 @@ class attendence extends Controller
                     $update->update([
                         'attendence' => '1',
                         'payed' => $req['payed_'.strval($lp)],
-                        'reset' => $reset
+                        'reset' => $reset,
+                        'hw' => $req['hw_'.strval($lp)]
                     ]);         
                 }
             }
                 return redirect()->route('lst_attend_f')->with('success','The Attendence Record Has Been Updated Successfully');
     
         }
+    }
+    public function absent_all(absentall $req)
+    {
+        $update = DB::table('attendence_m')->select('*')->where('date','=',$req['date'])->where('attendence','=','0');
+        $update->update([
+            'attendence' => '2'
+        ]);
+        $update = DB::table('attendence_f')->select('*')->where('date','=',$req['date'])->where('attendence','=','0');
+        $update->update([
+            'attendence' => '2'
+        ]);
+        return redirect()->route('attendlist')->with('success','absent set for all successfull');
     }
 }

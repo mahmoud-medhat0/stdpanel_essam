@@ -7,17 +7,26 @@
     {{ $success1 }}
     @endisset
     <div class="white_card card_height_100 mb_30" bis_skin_checked="1">
-    <div class="white_card_body" bis_skin_checked="1">
+        <div class="white_card_body" bis_skin_checked="1">
             <div class="white_box_tittle list_header" bis_skin_checked="1">
                 <h4>@yield('title')</h4>
                 <div class="box_right d-flex lms_block" bis_skin_checked="1">
                     <div class="serach_field_2" bis_skin_checked="1">
                         <div class="search_inner" bis_skin_checked="1">
-                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.." title="Type id">                                
-                            </div>
+                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.."
+                                title="Type id">
+                        </div>
                     </div>
                 </div>
             </div>
+            <form action="{{ route('absent_all') }}" method="post">
+                @csrf
+                <input type="hidden" name="date" value="{{ $date }}">
+                @error('date')
+                <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                @enderror
+                <button class="btn btn-primary my-4">Absent All</i></button>
+            </form>
             <form action="{{ route('attendupdate') }}" method="post">
                 @method('PUT')
                 @csrf
@@ -47,6 +56,9 @@
                             <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                 colspan="1" style="width: 74px;" aria-label="User: activate to sort column ascending">
                                 reset</th>
+                            <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                colspan="1" style="width: 74px;" aria-label="User: activate to sort column ascending">
+                                Home Work</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,8 +79,9 @@
                                         <select name="attend_{{ $student->std_id }}" id="attendence"
                                             class="form-control">
                                             <option>take attend</option>
-                                            <option @selected( $student->attendence=='1') value="1" >✅ present</option>
-                                            <option @selected( $student->attendence=='0') value="0" >❌ absent </option>
+                                            <option @selected( $student->attendence=='0') value="0" >⏱️ waiting</option>
+                                            <option @selected( $student->attendence=='1') value="1" >✅ present </option>
+                                            <option @selected( $student->attendence=='2') value="2" >❌ absent</option>
                                         </select>
                                         @error('attend_'.$student->std_id)
                                         <div class="text-danger font-weight-bold">*{{ $message }}</div>
@@ -79,8 +92,14 @@
                             </td>
                             <td>
                                 <div class="common_input mb_10" bis_skin_checked="1">
-                                    <input type="text" value="{{$student->payed}}" name="payed_{{ $student->std_id }}"
-                                        placeholder="payed" id="">
+                                    <select name="payed_{{ $student->std_id }}" class="form-control">
+                                        <option @selected(old('payed_'.$student->std_id)=='20') value="20">20</option>
+                                        <option @selected(old('payed_'.$student->std_id)=='15') value="15">15</option>
+                                        <option @selected(old('payed_'.$student->std_id)=='10') value="10">10</option>
+                                        <option @selected(old('payed_'.$student->std_id)=='5') value="5">5</option>
+                                        <option @selected(old('payed_'.$student->std_id)=='-') value="-">-</option>
+                                        <option @selected(old('payed_'.$student->std_id)=='*') value="*">*</option>
+                                    </select>
                                     @error('payed_' . $student->std_id)
                                     <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                     @enderror
@@ -94,6 +113,23 @@
                                     <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </td>
+                            <td>
+                                <div class="col-lg-18" bis_skin_checked="1">
+                                    <div class="" tabindex="0" bis_skin_checked="1">
+                                        <select name="hw_{{ $student->std_id }}" id="hw" class="form-control">
+                                            <option @selected( old('hw_'.$student->std_id)=='0') value="0" >❌ Not
+                                                delivered
+                                            </option>
+                                            <option @selected( old('hw_'.$student->std_id)=='1') value="1" >✅ delivered
+                                            </option>
+                                        </select>
+                                        @error('hw_'.$student->id)
+                                        <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             </td>
                         </tr>
                         @endforeach
@@ -138,5 +174,5 @@
                     }       
                   }
                 }
-                    </script>
+            </script>
             @endsection

@@ -41,16 +41,21 @@ class student extends Controller
             $validate = [
                 'name'=>['required','max:255'],
                 'username'=>['required','max:255','unique:students_m,username'],
-                'phone'=>['required','regex:/^1[0-2,5]\d{8}$/','unique:students_m,phone'],
-                'p_phone'=>['required','regex:/^1[0-2,5]\d{8}$/'],
+                'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students_m,phone'],
+                'p_phone'=>['required','regex:/^01[0-2,5]\d{8}$/'],
                 'verified'=>['required','in:0,1'],
                 'password' => ['required','min:8', 'confirmed']
             ];
             $request->validate($validate);
+            if($request['phone'] == null){
+                $phone = '*';
+            }else{
+                $phone=$request['phone'];
+            }
             DB::table('students_m')->insert([
                 'name' => $request['name'],
                 'username'=>$request['username'],
-                'phone' => $request['phone'],
+                'phone' => $phone,
                 'p_phone' => $request['p_phone'],
                 'verified' => $request['verified'],
                 'password' => Hash::make($request['password'])
@@ -59,22 +64,27 @@ class student extends Controller
         if ($request['gender'] =='f' ){
             $validate = [
                 'name'=>['required','max:255'],
-                'phone'=>['required','regex:/^1[0-2,5]\d{8}$/','unique:students_f,phone'],
-                'p_phone'=>['required','regex:/^1[0-2,5]\d{8}$/'],
+                'username'=>['required','max:255','unique:students_f,username'],
+                'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students_f,phone'],
+                'p_phone'=>['required','regex:/^01[0-2,5]\d{8}$/'],
                 'verified'=>['required','in:0,1'],
                 'password' => ['required','min:8', 'confirmed']
             ];
             $request->validate($validate);
+            if($request['phone'] == null){
+                $phone = '*';
+            }else{
+                $phone=$request['phone'];
+            }
             DB::table('students_f')->insert([
                 'name' => $request['name'],
-                'phone' => $request['phone'],
+                'username'=>$request['username'],
+                'phone' => $phone,
                 'p_phone' => $request['p_phone'],
                 'verified' => $request['verified'],
                 'password' => Hash::make($request['password'])
             ]);
         }
-
-        // return view('student.index',compact('request'));
         return redirect()->back()->with('success','Student Added Successfully');
     }
     public function edit(editstd $request){
@@ -91,10 +101,16 @@ class student extends Controller
     public function update (studentsupdateRequest $request){
         if ($request['gender'] == 'm'){
             $student = DB::table('students_m')->where('id','=',$request['id']);
+            if($request['phone'] == null){
+                $phone = '*';
+            }else{
+                $phone=$request['phone'];
+            }
             $student->update(
                 [
                     'name' => $request['name'],
-                    'phone' => $request['phone'],
+                    'username'=>$request['username'],
+                    'phone' => $phone,
                     'p_phone' => $request['p_phone'],
                     'verified' => $request['verified'],
                 ]
@@ -113,10 +129,16 @@ class student extends Controller
         }
         if ($request['gender'] == 'f'){
             $student = DB::table('students_f')->where('id','=',$request['id']);
+            if($request['phone'] == null){
+                $phone = '*';
+            }else{
+                $phone=$request['phone'];
+            }
             $student->update(
                 [
                     'name' => $request['name'],
-                    'phone' => $request['phone'],
+                    'username'=>$request['username'],
+                    'phone' => $phone,
                     'p_phone' => $request['p_phone'],
                     'verified' => $request['verified'],
                 ]

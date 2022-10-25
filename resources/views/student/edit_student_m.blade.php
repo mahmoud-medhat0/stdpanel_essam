@@ -32,7 +32,15 @@
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
-                            <input value="{{ $student->phone }}" type="number" name="phone" placeholder="phone">
+                            <input name="username" value="{{ $student->username }}" type="text" placeholder="username">
+                            @error('username')
+                            <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-6" bis_skin_checked="1">
+                        <div class="common_input mb_15" bis_skin_checked="1">
+                            <input value="{{ $student->phone }}" type="text" name="phone" placeholder="phone">
                             @error('phone')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror
@@ -40,7 +48,7 @@
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
-                            <input value="{{ $student->p_phone }}" type="number" name="p_phone"
+                            <input value="{{ $student->p_phone }}" type="text" name="p_phone"
                                 placeholder="parent phone">
                             @error('p_phone')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
@@ -62,6 +70,14 @@
                         <div class="common_input mb_15" bis_skin_checked="1">
                             <input id="password-confirm" name="password_confirmation" type="text"
                                 placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="col-lg-6" bis_skin_checked="1">
+                        <div class="common_input mb_15" bis_skin_checked="1">
+                            <input value="{{ $student->sumprep }}" type="text" name="sumprep" placeholder="sumprep">
+                            @error('sumprep')
+                            <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">

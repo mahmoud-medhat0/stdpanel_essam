@@ -1,5 +1,5 @@
 @extends('layouts.parent2')
-@section('title', 'Add New Attendence Record')
+@section('title', 'Add New Attendence Girls Record')
 @section('content')
 @include('messages.message')
 <div class="col-12" bis_skin_checked="1">
@@ -52,6 +52,9 @@
                         <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                             colspan="1" style="width: 74px;" aria-label="User: activate to sort column ascending">
                             reset</th>
+                        <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                            colspan="1" style="width: 74px;" aria-label="User: activate to sort column ascending">
+                            Home Work</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,9 +72,11 @@
                             <div class="col-lg-18" bis_skin_checked="1">
                                 <div class="" tabindex="0" bis_skin_checked="1">
                                     <select name="attend_{{ $student->id }}" id="attendence" class="form-control">
-                                        <option @selected( old('attend_'.$student->id)=='0') value="0" >❌ absent
+                                        <option @selected( old('attend_'.$student->id)=='0') value="0" >⏱️ waiting
                                         </option>
                                         <option @selected( old('attend_'.$student->id)=='1') value="1" >✅ present
+                                        </option>
+                                        <option @selected( old('attend_'.$student->id)=='2') value="2" >❌ absent
                                         </option>
                                     </select>
                                     @error('attend_'.$student->id)
@@ -83,8 +88,14 @@
                         </td>
                         <td>
                             <div class="common_input mb_10" bis_skin_checked="1">
-                                <input type="text" value="{{ old('payed_'.$student->id) }}"
-                                    name="payed_{{ $student->id }}" placeholder="payed" id="">
+                                <select name="payed_{{ $student->id }}" class="form-control">
+                                    <option @selected(old('payed_'.$student->id)=='20') value="20">20</option>
+                                    <option @selected(old('payed_'.$student->id)=='15') value="15">15</option>
+                                    <option @selected(old('payed_'.$student->id)=='10') value="10">10</option>
+                                    <option @selected(old('payed_'.$student->id)=='5') value="5">5</option>
+                                    <option @selected(old('payed_'.$student->id)=='-') value="-">-</option>
+                                    <option @selected(old('payed_'.$student->id)=='*') value="*">*</option>
+                                </select>
                                 @error('payed_' . $student->id)
                                 <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                 @enderror
@@ -98,6 +109,22 @@
                                 <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                 @enderror
                             </div>
+                        </td>
+                        <td>
+                            <div class="col-lg-18" bis_skin_checked="1">
+                                <div class="" tabindex="0" bis_skin_checked="1">
+                                    <select name="hw_{{ $student->id }}" id="hw" class="form-control">
+                                        <option @selected( old('hw_'.$student->id)=='0') value="0" >❌ Not delivered
+                                        </option>
+                                        <option @selected( old('hw_'.$student->id)=='1') value="1" >✅ delivered
+                                        </option>
+                                    </select>
+                                    @error('hw_'.$student->id)
+                                    <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                         </td>
                     </tr>
                     @endforeach

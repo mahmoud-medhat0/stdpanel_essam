@@ -69,10 +69,15 @@ class exercise extends Controller
                         return redirect()->back()->with('success1', 'Exercise Already Recorded');
                     }
                 if (isset($req['degree_'.strval($lp)])) {
+                    if($req['degree_'.strval($lp)] == null){
+                        $deg = '*';
+                    }else{
+                        $deg=$req['degree_'.strval($lp)];
+                    }
                     DB::table('exercises_m')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
-                        'degree' => $req['degree_'.strval($lp)]
+                        'degree' => $deg
                     ]);
                 }
             }
@@ -111,10 +116,15 @@ class exercise extends Controller
                         return redirect()->back()->with('success1', 'Exercise Already Recorded');
                     }
                 if (isset($req['degree_'.strval($lp)])) {
+                    if($req['degree_'.strval($lp)] == null){
+                        $deg = '*';
+                    }else{
+                        $deg=$req['degree_'.strval($lp)];
+                    }
                     DB::table('exercises_f')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
-                        'degree' => $req['degree_'.strval($lp)]
+                        'degree' => $deg
                     ]);
                 }
             }
@@ -175,7 +185,12 @@ class exercise extends Controller
                 $idrecord = DB::table('exercises_m')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
                 $update = ModelsExercise::find($idrecord);
-                $update->update(['degree' => $req['degree_'.strval($lp)]]);
+                if($req['degree_'.strval($lp)] == null){
+                    $deg = '*';
+                }else{
+                    $deg=$req['degree_'.strval($lp)];
+                }
+                $update->update(['degree' => $deg]);
             }
             return redirect()->route('exerciselist')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
     
@@ -201,7 +216,12 @@ class exercise extends Controller
                 $idrecord = DB::table('exercises_f')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
                 $update = ModelsExercise::find($idrecord);
-                $update->update(['degree' => $req['degree_'.strval($lp)]]);
+                if($req['degree_'.strval($lp)] == null){
+                    $deg = '*';
+                }else{
+                    $deg=$req['degree_'.strval($lp)];
+                }
+                $update->update(['degree' => $deg]);
             }
             return redirect()->route('exerciselist')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
     

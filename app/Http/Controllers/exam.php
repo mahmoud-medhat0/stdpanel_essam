@@ -72,10 +72,15 @@ class exam extends Controller
                         return redirect()->back()->with('success1', 'Exam Already Recorded');
                     }
                 if (isset($req['degree_'.strval($lp)])) {
+                    if($req['degree_'.strval($lp)] == null){
+                        $deg = '*';
+                    }else{
+                        $deg=$req['degree_'.strval($lp)];
+                    }
                     DB::table('exams_m')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
-                        'degree' => $req['degree_'.strval($lp)]
+                        'degree' => $deg
                     ]);
                 }
             }
@@ -114,10 +119,15 @@ class exam extends Controller
                         return redirect()->back()->with('success1', 'Exam Already Recorded');
                     }
                 if (isset($req['degree_'.strval($lp)])) {
+                    if($req['degree_'.strval($lp)] == null){
+                        $deg = '*';
+                    }else{
+                        $deg=$req['degree_'.strval($lp)];
+                    }
                     DB::table('exams_f')->insert([
                         'std_id' => $req['id_'.strval($lp)],
                         'date' => $req['date'],
-                        'degree' => $req['degree_'.strval($lp)]
+                        'degree' => $deg
                     ]);
                 }
             }
@@ -191,7 +201,12 @@ class exam extends Controller
                 $idrecord = DB::table('exams_m')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
                 $update = DB::table('exams_m')->select('*')->where('id','=',$idrecord);
-                $update->update(['degree' => $req['degree_'.strval($lp)]]);
+                if($req['degree_'.strval($lp)] == null){
+                    $deg = '*';
+                }else{
+                    $deg=$req['degree_'.strval($lp)];
+                }
+                $update->update(['degree' => $deg]);
             }
             return redirect()->route('lst_exm_m')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
         }
@@ -216,7 +231,12 @@ class exam extends Controller
                 $idrecord = DB::table('exams_f')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
                 $update = DB::table('exams_f')->select('*')->where('id','=',$idrecord);
-                $update->update(['degree' => $req['degree_'.strval($lp)]]);
+                if($req['degree_'.strval($lp)] == null){
+                    $deg = '*';
+                }else{
+                    $deg=$req['degree_'.strval($lp)];
+                }
+                $update->update(['degree' => $deg]);
             }
             return redirect()->route('lst_exm_f')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
         }
