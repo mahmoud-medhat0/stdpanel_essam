@@ -216,7 +216,7 @@
                     <div class="col-lg-12" bis_skin_checked="1">
                         <div class="footer_iner text-center" bis_skin_checked="1">
                             <p>2020 © Influence - Designed by
-                                <a href="#"> <i class="ti-heart"></i> </a><a href="#"> Dashboard</a>
+                                <a href="https://www.fb.com/7akemel3alam"> Mahmoud Medhat</a>
                             </p>
                         </div>
                     </div>
