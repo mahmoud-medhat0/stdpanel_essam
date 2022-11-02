@@ -24,7 +24,7 @@
                 <div class="row" bis_skin_checked="1">
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
-                            <input name="name" value="{{ $student->name }}" type="text" placeholder="Name">
+                            <input name="name" value="{{ $student->name }}" onkeyup="myFunction()" id="myInput" type="text" placeholder="Name">
                             @error('name')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
-                            <input name="username" value="{{ $student->username }}" type="text" placeholder="username">
+                            <input name="username" value="{{ $student->username }}" type="text" placeholder="username" id="input1" >
                             @error('username')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror
@@ -107,4 +107,20 @@
         </div>
     </div>
 </div>
+<script>
+function myFunction(){
+    var input, filter, input1, tr, td, rnd, txtValue,str,str1,len;
+      input = document.getElementById("myInput");
+      input1 =document.getElementById("input1");
+      filter = input.value.toUpperCase();
+      str = input.value;
+      rnd = Math.floor(Math.random() * 100);
+      len = str.split(" ").length;
+    //   for (let x in len){
+        str1 = str.replaceAll(' ','_');
+
+        //   }
+      input1.setAttribute('value',str1+rnd);
+}
+</script>
 @endsection

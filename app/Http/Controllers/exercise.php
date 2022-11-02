@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\exerciseedit;
 use App\Http\Requests\exercisestore;
 use App\Http\Requests\exerciseupdate;
-use App\Models\exercise as ModelsExercise;
 
 class exercise extends Controller
 {
@@ -184,7 +183,7 @@ class exercise extends Controller
             foreach ($loop as $lp) {
                 $idrecord = DB::table('exercises_m')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
-                $update = ModelsExercise::find($idrecord);
+                $update = DB::table('exercises_m')->select('*')->where('id','=',$idrecord);
                 if($req['degree_'.strval($lp)] == null){
                     $deg = '*';
                 }else{
@@ -192,7 +191,7 @@ class exercise extends Controller
                 }
                 $update->update(['degree' => $deg]);
             }
-            return redirect()->route('exerciselist')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
+            return redirect()->route('lst_exc_m')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
     
         }
         if ($req['gender'] == 'f'){
@@ -215,7 +214,7 @@ class exercise extends Controller
             foreach ($loop as $lp) {
                 $idrecord = DB::table('exercises_f')->select('id')->where('std_id', '=', $req['id_'.strval($lp)])->where('date','=', $req['date'])->get();
                 $idrecord=$idrecord['0']->id;
-                $update = ModelsExercise::find($idrecord);
+                $update = DB::table('exercises_f')->select('*')->where('id','=',$idrecord);
                 if($req['degree_'.strval($lp)] == null){
                     $deg = '*';
                 }else{
@@ -223,7 +222,7 @@ class exercise extends Controller
                 }
                 $update->update(['degree' => $deg]);
             }
-            return redirect()->route('exerciselist')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
+            return redirect()->route('lst_exc_f')->with('success','The Exam Record ('.$req['date'].') updated Successfully')->withInput();
     
         }
     }

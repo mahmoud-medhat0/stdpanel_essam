@@ -44,7 +44,7 @@
                                         <input type="hidden" name="gender" value="m">
                                         <button class="action_btn"><i class="far fa-edit"></i></button>
                                     </form>
-                                    <form action="{{ route('deleteexercise'}}" method="post">
+                                    <form action="{{ route('deleteexercise')}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="date" value="{{ $date->date }}">
