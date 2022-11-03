@@ -125,7 +125,7 @@ class student extends Controller
                     );
             }
             $students = DB::table('students_m')->select('*')->get();
-            return redirect()->back()->with('success','Student Male '.$request['id'].' Data Updated Successfully');
+            return view('student.index_students_m',compact('students'))->with('success','Student Male '.$request['id'].' Data Updated Successfully');
         }
         if ($request['gender'] == 'f'){
             $student = DB::table('students_f')->where('id','=',$request['id']);
