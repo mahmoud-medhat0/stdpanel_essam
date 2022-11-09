@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('img/mini_logo.png')}}')}}" type="image/png">
+    <link rel="icon" href="{{ asset('img/mini_logo1.png')}}')}}" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css')}}">
 
@@ -50,8 +50,8 @@
         sidebar
     @endif">
         <div class="logo d-flex justify-content-between" bis_skin_checked="1">
-            <a class="large_logo" href="{{ route('home') }}"><img src="{{ asset('img/logo.png')}}" alt=""></a>
-            <a class="small_logo" href="{{ route('home') }}"><img src="{{ asset('img/mini_logo.png')}}" alt=""></a>
+            <a class="large_logo" href="{{ route('home') }}"><img src="{{ asset('img/logo1.png')}}" alt=""></a>
+            <a class="small_logo" href="{{ route('home') }}"><img src="{{ asset('img/mini_logo1.png')}}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none" bis_skin_checked="1">
                 <i class="ti-close"></i>
             </div>
@@ -160,7 +160,7 @@
                         <div class="header_right d-flex justify-content-between align-items-center"
                             bis_skin_checked="1">
                             <div class="profile_info" bis_skin_checked="1">
-                                <img src="{{ asset('img/client_img.png')}}" alt="">
+                                <img src="{{ asset('img/client_img1.png')}}" alt="">
                                 <div class="profile_info_iner" bis_skin_checked="1">
                                     <div class="profile_author_name" bis_skin_checked="1">
                                         <h5>{{ Auth::guard('web')->user()->name }} </h5>

@@ -12,7 +12,9 @@
                     <div class="box_right d-flex lms_block" bis_skin_checked="1">
                         <div class="serach_field_2" bis_skin_checked="1">
                             <div class="search_inner" bis_skin_checked="1">
-                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.." title="Type id">                                </div>
+                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.."
+                                    title="Type id">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,8 +49,8 @@
                                 @foreach ($students as $student)
                                 <tr role="row" class="odd">
                                     <th scope="row" tabindex="0" class="sorting_1">
-                                         <a href="{{ route('edit', $student->id) }}">
-                                            {{ $student->id }}</th>
+                                        {{ $student->id }}
+                                    </th>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->phone }}</td>
                                     <td>{{ $student->p_phone }}</td>
@@ -113,5 +115,5 @@
             }       
           }
         }
-            </script>
+    </script>
     @endsection

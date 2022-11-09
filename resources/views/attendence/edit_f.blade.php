@@ -81,8 +81,7 @@
                                             <option>take attend</option>
                                             <option @selected( $student->attendence=='0') value="0" >⏱️ waiting</option>
                                             <option @selected( $student->attendence=='1') value="1" >✅ present </option>
-                                            <option @selected( $student->attendence=='2') value="2" >❌ absent</option>
-                                        </select>
+                                            <option @selected( $student->attendence=='2') value="2" >❌ absent</option>                                        </select>
                                         @error('attend_'.$student->std_id)
                                         <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                         @enderror
@@ -124,7 +123,7 @@
                                             <option @selected( old('hw_'.$student->std_id)=='1') value="1" >✅ delivered
                                             </option>
                                         </select>
-                                        @error('hw_'.$student->id)
+                                        @error('hw_'.$student->std_id)
                                         <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                         @enderror
                                     </div>

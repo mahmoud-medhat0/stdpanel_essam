@@ -331,9 +331,7 @@ class attendence extends Controller
                     ]);         
                 }
             }
-            $dates = DB::table('attendence_m')->select('date')->groupBy('date')->get();
-            $count = $dates->count();
-            return redirect(view('attendence/index_m', compact('dates')))->with('success','The Attendence Record Has Been Updated Successfully');
+                return redirect()->route('lst_attend_m')->with('success','The Attendence Record Has Been Updated Successfully');
     
         }
         if ($req['gender'] == 'f'){

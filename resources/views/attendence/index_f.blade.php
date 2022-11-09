@@ -40,6 +40,7 @@
                                         @error('date')
                                         <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                         @enderror
+                                        <input type="hidden" name="gender" value="f">
                                         <button class="action_btn"><i class="far fa-edit"></i></button>
                                     </form>
                                     <form action="{{ route('attenddelete') }}" method="post">

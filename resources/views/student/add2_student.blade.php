@@ -136,7 +136,7 @@
           filter = input.value.toUpperCase();
           str = input.value;
           rnd = Math.floor(Math.random() * 100);
-          str1 = str.replace(' ','_')+'_'+rnd;
+          str1 = str.replaceAll(' ','_')+'_'+rnd;
           input1.setAttribute('value',str1);
     }
 </script>

@@ -49,8 +49,7 @@
                                 @foreach ($students as $student)
                                 <tr role="row" class="odd">
                                     <th scope="row" tabindex="0" class="sorting_1">
-                                        <a href="{{ route('edit', $student->id) }}">
-                                            {{ $student->id }}
+                                        {{ $student->id }}
                                     </th>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->phone }}</td>

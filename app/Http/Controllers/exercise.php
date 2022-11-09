@@ -58,9 +58,6 @@ class exercise extends Controller
             foreach ($id as $idc) {
                 $validate[$idc] = 'required|exists:students_m,id';
             }
-            foreach ($degrees as $degree) {
-                $validate[$degree] = 'required';
-            }
             $data1 = $req->validate($validate);
             foreach ($loop as $lp) {
                 $ss=DB::table('exercises_m')->select('std_id', 'date')->where('date', '=', $req['date'])->where('std_id', '=', $req['id_'.strval($lp)])->get();
@@ -104,9 +101,6 @@ class exercise extends Controller
             $validate = array();
             foreach ($id as $idc) {
                 $validate[$idc] = 'required|exists:students_f,id';
-            }
-            foreach ($degrees as $degree) {
-                $validate[$degree] = 'required';
             }
             $data1 = $req->validate($validate);
             foreach ($loop as $lp) {
