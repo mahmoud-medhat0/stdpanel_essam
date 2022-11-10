@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 07:48 AM
+-- Generation Time: Nov 10, 2022 at 06:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -43,8 +43,9 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'mahmoud medhat', 'hetlarhhs@gmail.com', '$2y$10$nXBOO53h.jep3IPxONDIEew26P3TRS0aE9zsk3jFhbfgO4CGXIhGq', NULL, 'SBMKjm3yNM93Rfs9wCi3VidPZxWKDJH4bCeRsElRvfXT89eRPi1mT2JKTxY1', '2022-10-06 11:18:48', '2022-10-06 11:18:48'),
-(4, 'mm mm', 'efotqz@hi2.in', '$2y$10$qWM24dGrGNjtmEAZEv7G.emVP3U3/cv8TvCYcmAUcAozvdthcz1qC', NULL, NULL, '2022-10-15 18:52:18', '2022-10-15 19:19:49');
+(1, 'mahmoud medhat', 'hetlarhhs@gmail.com', '$2y$10$nXBOO53h.jep3IPxONDIEew26P3TRS0aE9zsk3jFhbfgO4CGXIhGq', NULL, 'WQHMOKQvMz15e41RPRhhExG3mBXemcTtNVBL7p1TOhx4SLyIkL3TJcXuyNdY', '2022-10-06 11:18:48', '2022-10-06 11:18:48'),
+(4, 'mm mm', 'efotqz@hi2.in', '$2y$10$qWM24dGrGNjtmEAZEv7G.emVP3U3/cv8TvCYcmAUcAozvdthcz1qC', NULL, NULL, '2022-10-15 18:52:18', '2022-10-15 19:19:49'),
+(5, 'hager', 'jkhjdbckjhbsd@gmail.com', '$2y$10$zH/eFdxT4D9ukaDK8hBPy.n/WoCoGqliPRJjEAh.QgIpdLvKglO46', NULL, NULL, '2022-11-09 13:53:17', '2022-11-09 13:53:17');
 
 -- --------------------------------------------------------
 
@@ -62,6 +63,13 @@ CREATE TABLE `attendence_f` (
   `reset` char(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `attendence_f`
+--
+
+INSERT INTO `attendence_f` (`id`, `std_id`, `date`, `attendence`, `hw`, `payed`, `reset`) VALUES
+(59, 22, '2022-11-09', 1, 1, '20', '5');
+
 -- --------------------------------------------------------
 
 --
@@ -75,15 +83,18 @@ CREATE TABLE `attendence_m` (
   `attendence` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
   `hw` tinyint(1) NOT NULL DEFAULT 0,
   `payed` char(5) DEFAULT NULL,
-  `reset` char(5) DEFAULT NULL
+  `reset` char(5) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `attendence_m`
 --
 
-INSERT INTO `attendence_m` (`id`, `std_id`, `date`, `attendence`, `hw`, `payed`, `reset`) VALUES
-(59, 20, '2022-10-22', 2, 0, '*', '*');
+INSERT INTO `attendence_m` (`id`, `std_id`, `date`, `attendence`, `hw`, `payed`, `reset`, `updated_at`) VALUES
+(62, 26, '2022-11-09', 0, 0, '*', '*', NULL),
+(63, 26, '2022-11-11', 0, 0, '*', '*', NULL),
+(64, 27, '2022-11-11', 1, 0, '20', '10', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,6 +111,13 @@ CREATE TABLE `exams_f` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `exams_f`
+--
+
+INSERT INTO `exams_f` (`id`, `std_id`, `date`, `degree`, `created_at`, `updated_at`) VALUES
+(22, 22, '2022-11-09', '5 out of 5', '2022-11-09 15:05:30', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +132,14 @@ CREATE TABLE `exams_m` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exams_m`
+--
+
+INSERT INTO `exams_m` (`id`, `std_id`, `date`, `degree`, `created_at`, `updated_at`) VALUES
+(24, 26, '2022-11-09', '*', '2022-11-09 15:36:04', NULL),
+(25, 27, '2022-11-09', '5 /5', '2022-11-09 15:36:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -130,6 +156,14 @@ CREATE TABLE `exercises_f` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `exercises_f`
+--
+
+INSERT INTO `exercises_f` (`id`, `std_id`, `date`, `degree`, `created_at`, `updated_at`) VALUES
+(26, 22, '2022-11-09', '20 out of 20', '2022-11-09 15:03:48', NULL),
+(27, 22, '2022-11-10', '20 out of 20', '2022-11-09 15:04:25', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +178,14 @@ CREATE TABLE `exercises_m` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exercises_m`
+--
+
+INSERT INTO `exercises_m` (`id`, `std_id`, `date`, `degree`, `created_at`, `updated_at`) VALUES
+(27, 26, '2022-11-09', '*', '2022-11-09 15:29:30', NULL),
+(28, 27, '2022-11-09', '*', '2022-11-09 15:29:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -208,7 +250,7 @@ CREATE TABLE `students_f` (
 --
 
 INSERT INTO `students_f` (`id`, `username`, `name`, `password`, `created_at`, `updated_at`, `phone`, `p_phone`, `verified`, `sumprep`) VALUES
-(21, 'hetltik1@gmail.com', 'hagar', '$2y$10$OWOK1D5Hp.lsZ8ZX1noS0.El5G/1SeTPpEf4Af32uN/MqCliyyaQW', '2022-10-22 16:01:48', '2022-10-22 16:56:28', '1148422800', '1148422800', 1, '111');
+(22, 'hagar_94', 'hagar', '$2y$10$oyNjovVZGwwL4vBgt511hOj8AXokH9Fy4l2LiO19MaJAXvT/uYX3e', '2022-11-09 14:43:37', NULL, '01012345678', '01034567890', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -234,9 +276,8 @@ CREATE TABLE `students_m` (
 --
 
 INSERT INTO `students_m` (`id`, `name`, `username`, `password`, `created_at`, `updated_at`, `phone`, `p_phone`, `verified`, `sumprep`) VALUES
-(20, 'mm mm', '[\"required\",\"max:255\"]', '$2y$10$4TVl/.or9T6msgIGaMdunOr/0k4lQ4Yagykwg49ucRP/C18Z8jCGe', '2022-10-21 00:12:54', '2022-10-22 16:44:39', '1148422820', '1148422820', 1, NULL),
-(24, 'mm mm', 'rflkdlk', '$2y$10$h.EtQxSNBu5Za6gU4A77AOz757gLbQ.GTkU1GXVuWuJgQo9Bgpyuy', '2022-10-22 15:34:44', '2022-10-22 17:06:49', '*', '01148422821', 1, NULL),
-(25, 'mm mm', 'Mouuabdallah@gmail.com', '$2y$10$XGOAkKcSwKxnXRlVn6/tT.UyEEl6CXq.XwSKr4VNDH3w.xF4cJfI6', '2022-10-22 16:54:09', '2022-10-23 13:41:08', '01148422899', '01148422899', 0, NULL);
+(26, 'mahmoud medhat', 'mahmoud_medhat_6', '$2y$10$V6ed9tX/R/IaTi5bNKvYmuDU4fYeL3gN9T/wnQRjLUUBcvoW9meF6', '2022-11-09 14:57:13', NULL, '01148422820', '01148422820', 1, NULL),
+(27, 'ahmed', 'ahmed_95', '$2y$10$sDbSESRUvdxPel3Fs6gyPuRN1tIaBUhAFrctcfoWa.jd9rKZCI4B.', '2022-11-09 15:08:00', NULL, '01123456781', '01023456789', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -327,43 +368,43 @@ ALTER TABLE `students_m`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `attendence_f`
 --
 ALTER TABLE `attendence_f`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `attendence_m`
 --
 ALTER TABLE `attendence_m`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `exams_f`
 --
 ALTER TABLE `exams_f`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `exams_m`
 --
 ALTER TABLE `exams_m`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `exercises_f`
 --
 ALTER TABLE `exercises_f`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `exercises_m`
 --
 ALTER TABLE `exercises_m`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -381,13 +422,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `students_f`
 --
 ALTER TABLE `students_f`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `students_m`
 --
 ALTER TABLE `students_m`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
@@ -397,7 +438,7 @@ ALTER TABLE `students_m`
 -- Constraints for table `attendence_f`
 --
 ALTER TABLE `attendence_f`
-  ADD CONSTRAINT `attendence_f_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `students_m` (`id`);
+  ADD CONSTRAINT `FK_attendence_f_students_f` FOREIGN KEY (`std_id`) REFERENCES `students_f` (`id`);
 
 --
 -- Constraints for table `attendence_m`
@@ -409,7 +450,7 @@ ALTER TABLE `attendence_m`
 -- Constraints for table `exams_f`
 --
 ALTER TABLE `exams_f`
-  ADD CONSTRAINT `exams_f_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `students_m` (`id`);
+  ADD CONSTRAINT `FK_exams_f_students_f` FOREIGN KEY (`std_id`) REFERENCES `students_f` (`id`);
 
 --
 -- Constraints for table `exams_m`
@@ -421,7 +462,7 @@ ALTER TABLE `exams_m`
 -- Constraints for table `exercises_f`
 --
 ALTER TABLE `exercises_f`
-  ADD CONSTRAINT `exercises_f_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `students_m` (`id`);
+  ADD CONSTRAINT `FK_exercises_f_students_f` FOREIGN KEY (`std_id`) REFERENCES `students_f` (`id`);
 
 --
 -- Constraints for table `exercises_m`
