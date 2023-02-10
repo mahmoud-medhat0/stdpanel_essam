@@ -7,15 +7,13 @@
             {{ $success1 }}
         @endisset
         <center>
+            @foreach ($secs as $sec)
             <div class="col-lg-6">
                 <div class="create_report_btn mt_30">
-                    <a href="{{ route('add_exc_m') }}" class="btn_1 radius_btn d-block text-center">Boys</a>
+                    <a href="{{ route('add_exc',$sec->id) }}"
+                        class="btn_1 radius_btn d-block text-center">{{ $sec->name }}</a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="create_report_btn mt_30">
-                    <a href="{{ route('add_exc_f') }}" class="btn_1 radius_btn d-block text-center">Girls</a>
-                </div>
-            </div>
-        </center>      
+            @endforeach
+    </center>
 @endsection

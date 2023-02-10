@@ -31,10 +31,11 @@ Route::get('/', function () {
 Auth::routes([
     'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
+    'verify' => false,
+    'home' => false, // Email Verification Routes...
   ]);
-  
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::controller(Admins::class)->group(function () {
@@ -48,55 +49,60 @@ Route::controller(Admins::class)->group(function () {
 
 Route::controller(attendence::class)->group(function(){
     Route::get('attendence/new','new')->name('attendencenew');
-    Route::get('attendence/new/m','new_m')->name('add_attend_m');
-    Route::get('attendence/new/f','new_f')->name('add_attend_f');
+    Route::get('attendence/new/sec/{id}','new_sec')->name('add_attend');
+    Route::get('attendence/new/excel','attend_excel')->name('attend_excel');
+    Route::get('attendence/new/excel/stamp','attend_stamp')->name('attend_stamp');
+    Route::post('attendence/new/excel/store','store_excel')->name('attend_store_excel');
     Route::get('attendence/list','attendlist')->name('attendlist');
-    Route::get('attendence/list/m','attendlist_m')->name('lst_attend_m');
-    Route::get('attendence/list/f','attendlist_f')->name('lst_attend_f');
-    Route::post('attendence/edit','readattend')->name('readattend');
+    Route::get('attendence/list/sec/{id}','attendlist_sec')->name('lst_attend');
+    Route::get('attendence/edit/{id}','readattend')->name('readattend');
     Route::post('attendence/store','storeattend')->name('storeattend');
     Route::put('attendence/update','attendupdate')->name('attendupdate');
-    Route::delete('attendence/delete/','attenddelete')->name('attenddelete');
+    Route::get('attendence/delete/{id}','attenddelete')->name('attenddelete');
     Route::post('attend/absent','absent_all')->name('absent_all');
+});
+
+Route::controller(student::class)->group(function () {
+    Route::get('std/std', 'read')->name('std');
+    Route::get('std/add', 'add')->name('add');
+    Route::post('std/edit/', 'edit')->name('edit');
+    Route::put('std/update/', 'update')->name('update');
+    Route::delete('std/delete/', 'delete')->name('delete');
+    Route::post('store_std', 'store')->name('store_std');
+    Route::get('std/sec/{id}','read_sec')->name('read');
+    Route::get('std/excel','std_excel')->name('std_excel');
+    Route::get('std/excel/stamp','std_stamp')->name('std_stamp');
+    Route::post('std/excel/store','store_excel')->name('store_excel');
+});
+
+Route::controller(exam::class)->group(function (){
+    Route::get('exam/list','index')->name('lstexm');
+    Route::get('exam/list/sec/{id}','list_exam')->name('list_exam');
+    Route::get('exam/add','add')->name('addexm');
+    Route::get('exam/add/sec/{id}','add_exm')->name('add_exm');
+    Route::get('exam/edit/{id}', 'readcexm')->name('editexm');
+    Route::post('exam/update', 'examupdate')->name('examupdate');
+    Route::post('exam/store','storeexm')->name('storeexm');
+    Route::get('exam/delete/{id}', 'delete')->name('deleteexm');
+    Route::get('exam/add/excel','Exm_Excel')->name('Exm_Excel');
+    Route::get('exam/add/excel/stamp','Exm_stamp')->name('Exm_stamp');
+    Route::post('exam/add/excel/store','store_excel')->name('Exm_store');
+});
+Route::controller(exercise::class)->group(function (){
+    Route::get('exercise/list','exerciselist')->name('exerciselist');
+    Route::get('exercise/list/{id}','lst_exc')->name('lst_exc');
+    Route::get('exercise/add','exerciseadd')->name('exerciseadd');
+    Route::get('exercise/add/sec/{id}','add_exc')->name('add_exc');
+    Route::get('exercise/edit/{id}', 'readexercise')->name('editexercise');
+    Route::post('exercise/update', 'exerciseupdate')->name('exerciseupdate');
+    Route::post('exercise/store','exercisestore')->name('exercisestore');
+    Route::get('exercise/delete/{id}', 'exercisedelete')->name('deleteexercise');
+    Route::get('exercise/add/excel','exercise_Excel')->name('exercise_Excel');
+    Route::get('exercise/add/excel/stamp','exercise_stamp')->name('exercise_stamp');
+    Route::post('exercise/add/excel/store','store_excel')->name('exercise_store_sheet');
 });
 
 Route::controller(theme::class)->group(function (){
     Route::get('theme/dark','setdark')->name('themedark');
     Route::get('theme/light','setlight')->name('themelight');
 });
-
-Route::controller(exam::class)->group(function (){
-    Route::get('exam/list','examlist')->name('lstexm');
-    Route::get('exam/list/m','lst_exm_m')->name('lst_exm_m');
-    Route::get('exam/list/f','lst_exm_f')->name('lst_exm_f');
-    Route::get('exam/add','add')->name('addexm');
-    Route::get('exam/add/m','add_m')->name('add_exm_m');
-    Route::get('exam/add/f','add_f')->name('add_exm_f');
-    Route::post('exam/edit', 'readcexm')->name('editexm');
-    Route::post('exam/update', 'examupdate')->name('examupdate');
-    Route::post('exam/store','storeexm')->name('storeexm');
-    Route::delete('exam/delete/{date}', 'delete')->name('deleteexm');
-});
-Route::controller(exercise::class)->group(function (){
-    Route::get('exercise/list','exerciselist')->name('exerciselist');
-    Route::get('exercise/list/m','lst_exc_m')->name('lst_exc_m');
-    Route::get('exercise/list/f','lst_exc_f')->name('lst_exc_f');
-    Route::get('exercise/add','exerciseadd')->name('exerciseadd');
-    Route::get('exercise/add/m','add_exc_m')->name('add_exc_m');
-    Route::get('exercise/add/f','add_exc_f')->name('add_exc_f');
-    Route::post('exercise/edit', 'readexercise')->name('editexercise');
-    Route::post('exercise/update', 'exerciseupdate')->name('exerciseupdate');
-    Route::post('exercise/store','exercisestore')->name('exercisestore');
-    Route::delete('exercise/delete/', 'exercisedelete')->name('deleteexercise');
-});
-
-Route::controller(student::class)->group(function () {
-     Route::get('std/std', 'read')->name('std');
-     Route::get('std/add', 'add')->name('add');
-     Route::post('std/edit/', 'edit')->name('edit');
-     Route::put('std/update/', 'update')->name('update');
-     Route::delete('std/delete/', 'delete')->name('delete');
-     Route::post('store_std', 'store')->name('store_std');
-     Route::get('std/m','read_m')->name('read_m');
-     Route::get('std/f','read_f')->name('read_f');
- });

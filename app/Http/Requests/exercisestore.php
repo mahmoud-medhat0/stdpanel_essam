@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidBranch;
 use Illuminate\Foundation\Http\FormRequest;
 
 class exercisestore extends FormRequest
@@ -25,6 +26,7 @@ class exercisestore extends FormRequest
     {
         return [
             'date' => ['required', 'date'],
+            'branch'=>['required',new ValidBranch]
         ];
     }
 }

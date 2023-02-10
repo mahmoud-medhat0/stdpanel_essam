@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidExamRecord;
+use App\Rules\ValidBranch;
+use App\Rules\ValidSecType;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Foundation\Http\FormRequest;
 
-class examedit extends FormRequest
+class ExerciseStoreExcel extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +27,10 @@ class examedit extends FormRequest
     public function rules()
     {
         return [
-            'id' =>['required',new ValidExamRecord]
+            'date' => ['required', 'date'],
+            'sec' => ['required', new ValidSecType],
+            'branch' => ['required', new ValidBranch],
+            'sheet' => ['required', File::types('xls', 'xlsx')]
         ];
     }
 }

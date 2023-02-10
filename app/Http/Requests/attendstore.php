@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidBranch;
+use App\Rules\ValidSecType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class attendstore extends FormRequest
@@ -24,7 +26,9 @@ class attendstore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'branche'=>['required',new ValidBranch],
+            'sec'=>['required',new ValidSecType],
+            'date'=>['required','date']
         ];
     }
 }

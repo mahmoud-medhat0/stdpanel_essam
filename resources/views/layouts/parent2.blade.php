@@ -98,6 +98,7 @@
                 <ul class="mm-collapse">
                     <li><a href="{{ route('std') }}">students List</a></li>
                     <li><a href="{{ route('add') }}">Add New student</a></li>
+                    <li><a href="{{ route('std_excel') }}">Add Students From Excel</a></li>
                 </ul>
             </li>
             <li class="">
@@ -112,6 +113,7 @@
                 <ul class="mm-collapse">
                     <li><a href="{{ route('attendlist') }}">attendance history</a></li>
                     <li><a href="{{ route('attendencenew') }}">Take New attendance</a></li>
+                    <li><a href="{{ route('attend_excel') }}">Take Attendence from sheet</a></li>
                 </ul>
             </li>
             <li class="">
@@ -126,6 +128,7 @@
                 <ul class="mm-collapse">
                     <li><a href="{{ route('exerciselist') }}">exercises history</a></li>
                     <li><a href="{{ route('exerciseadd') }}">Add New exercise Record</a></li>
+                    <li><a href="{{ route('exercise_Excel') }}">Add exercise From Excel</a></li>
                 </ul>
             </li>
             <li class="">
@@ -140,6 +143,7 @@
                 <ul class="mm-collapse">
                     <li><a href="{{ route('lstexm') }}">exams history</a></li>
                     <li><a href="{{ route('addexm') }}">Add New Exam Record</a></li>
+                    <li><a href="{{ route('Exm_Excel') }}">Add Exams From Excel</a></li>
                 </ul>
             </li>
         </ul>
@@ -172,7 +176,7 @@
                                             @csrf
                                             <button type="submit">Logout</button>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +274,7 @@
 
     <script src="{{ asset('vendors/text_editor/summernote-bs4.js')}}"></script>
     <script src="{{ asset('vendors/am_chart/amcharts.js')}}"></script>
- 
+
     <script src="{{ asset('vendors/scroll/perfect-scrollbar.min.js')}}"></script>
     <script src="{{ asset('vendors/scroll/scrollable-custom.js')}}"></script>
 
