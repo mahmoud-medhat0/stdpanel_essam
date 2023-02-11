@@ -182,7 +182,8 @@ class exam extends Controller
         ExamRecords::create([
             'date' => $request['date'],
             'Branch_id' => $request['branch'],
-            'sec_id' => $request['sec']
+            'sec_id' => $request['sec'],
+            'maximum'=>$request['maximum']
         ]);
         $idrecord = ExamRecords::latest('created_at')->get()[0]->id;
         session()->flash('idrecord', $idrecord);

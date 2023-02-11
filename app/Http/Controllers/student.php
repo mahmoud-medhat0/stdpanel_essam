@@ -66,7 +66,7 @@ class student extends Controller
             ]);
         return redirect()->back()->with('success','Student Added Successfully');
     }
-    public function edit(editstd $request){
+    public function edit(Request $request){
         $student = students::where('id',$request['id'])->get()[0];
         $secs = Sec_type::all();
         return view('student.edit_student')->with('student',$student)->with('secs',$secs);
@@ -111,7 +111,7 @@ class student extends Controller
             }
             return view('student.index_students',compact('students'))->with('success','Student '.$request['id'].' Data Updated Successfully');
     }
-    public function delete(delstd $request){
+    public function delete(Request $request){
         students::where('id',$request['id'])->delete();
         return redirect()->back()->with('success','Student Data Deleted Successfully');
     }

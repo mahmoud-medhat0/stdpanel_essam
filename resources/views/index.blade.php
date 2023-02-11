@@ -46,7 +46,7 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                        <input class="input100 @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                        <input class="form-control input100 @error('email') is-invalid @enderror" value="{{ old('email') }}"
                             type="email" required name="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">

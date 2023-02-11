@@ -10,7 +10,8 @@
                     <h3 class="m-0">@yield('title')</h3>
                 </div>
                 <div>
-                    <a class="btn_1 radius_btn d-block text-center" href="{{ route('attend_stamp') }}">Download stamp</a>
+                    <a class="btn_1 radius_btn d-block text-center" href="{{ route('attend_stamp') }}">Download
+                        stamp</a>
                 </div>
             </div>
         </div>
@@ -23,7 +24,7 @@
                 <div class="row" bis_skin_checked="1">
                     <div class="col-lg-6">
                         <label for="start">Select date:</label>
-                        <input type="date" id="start" name="date" value="{{ date('Y-m-d') }}">
+                        <input type="date" class="form-control" id="start" name="date" value="{{ date('Y-m-d') }}">
                         @error('date')
                         <div class="text-danger font-weight-bold">*{{ $message }}</div>
                         @enderror
@@ -62,7 +63,7 @@
                     <div class="col-lg-6">
                         <div class=" mb-0">
                             <label for="sheet">sheet</label>
-                            <input type="file" name="sheet" id="exampleFormControlFile1">
+                            <input class="form-control" type="file" name="sheet" id="exampleFormControlFile1">
                             @error('sheet')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror
@@ -71,7 +72,7 @@
                     <div class="col-12" bis_skin_checked="1">
                         <center>
                             <div class="create_report_btn mt_30" bis_skin_checked="1">
-                                <button class="btn_1 radius_btn d-block text-center">Add Students</button>
+                                <button class="btn_1 radius_btn d-block text-center">Add Attendence Record</button>
                             </div>
                         </center>
 

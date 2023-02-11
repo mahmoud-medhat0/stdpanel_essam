@@ -21,15 +21,24 @@
             <form action="{{ route('Exm_store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row" bis_skin_checked="1">
+                    <center>
+                        <div class="col-lg-6" bis_skin_checked="1">
+                            <label for="start">Select date:</label>
+                            <input class="form-control" type="date" id="start" name="date" value="{{ date('Y-m-d') }}">
+                            @error('date')
+                            <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </center>
                     <div class="col-lg-6">
-                        <label for="start">Select date:</label>
-                        <input type="date" id="start" name="date" value="{{ date('Y-m-d') }}">
-                        @error('date')
-                        <div class="text-danger font-weight-bold">*{{ $message }}</div>
-                        @enderror
+                        <div>
+                            <label for="maximum">maximum degree</label>
+                            <input type="text" name="maximum" class="form-control" placeholder="maximum degree">
+                        </div>
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="" tabindex="0" bis_skin_checked="1">
+                            <label for="sec">secondary grade</label>
                             <select name="sec" id="status" class="form-control">
                                 <option value="">NONE</option>
                                 @foreach ($secs as $sec)
@@ -60,7 +69,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class=" mb-0">
-                            <input type="file" name="sheet" id="exampleFormControlFile1">
+                            <label for="sheet">sheet</label>
+                            <input type="file" name="sheet" class="form-control" id="exampleFormControlFile1">
                             @error('sheet')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror

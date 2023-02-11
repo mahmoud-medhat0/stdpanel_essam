@@ -19,7 +19,6 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $student->id }}">
-                <input type="hidden" name="gender" value="m">
                 <div class="row" bis_skin_checked="1">
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">

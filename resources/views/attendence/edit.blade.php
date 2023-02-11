@@ -10,18 +10,10 @@
         <div class="white_card_body" bis_skin_checked="1">
             <div class="white_box_tittle list_header" bis_skin_checked="1">
                 <h4>@yield('title')</h4>
-                <div class="box_right d-flex lms_block" bis_skin_checked="1">
-                    <div class="serach_field_2" bis_skin_checked="1">
-                        <div class="search_inner" bis_skin_checked="1">
-                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.."
-                                title="Type id">
-                        </div>
-                    </div>
-                </div>
             </div>
             <form action="{{ route('absent_all') }}" method="post">
                 @csrf
-                <input type="hidden" name="date" value="{{ $date }}">
+                <input  type="hidden" name="date" value="{{ $date }}">
                 @error('date')
                 <div class="text-danger font-weight-bold">*{{ $message }}</div>
                 @enderror
@@ -31,7 +23,7 @@
                 @method('PUT')
                 @csrf
                 <center> <label for="start">Select date:</label>
-                    <input type="date" id="start" disabled name="" value="{{ $date }}">
+                    <input class="form-control" type="date" id="start" disabled name="" value="{{ $date }}">
                     <input type="hidden" id="start" name="date" value="{{ $date }}">
                     @error('date')
                     <div class="text-danger font-weight-bold">*{{ $message }}</div>
@@ -106,7 +98,7 @@
                             </td>
                             <td>
                                 <div class="common_input mb_10" bis_skin_checked="1">
-                                    <input type="text" value="{{$student->reset }}" name="reset_{{ $student->std_id }}"
+                                    <input class="form-control" type="text" value="{{$student->reset }}" name="reset_{{ $student->std_id }}"
                                         placeholder="reset" id="">
                                     @error('reset_' . $student->std_id)
                                     <div class="text-danger font-weight-bold">*{{ $message }}</div>

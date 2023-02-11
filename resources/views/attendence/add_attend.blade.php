@@ -1,5 +1,5 @@
 @extends('layouts.parent2')
-@section('title', 'Add New Attendence Boys Record')
+@section('title', 'Add New Attendence Record')
 @section('content')
 @include('messages.message')
 <div class="col-12" bis_skin_checked="1">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="serach_field_2" bis_skin_checked="1">
                         <div class="search_inner" bis_skin_checked="1">
-                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.."
+                            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for id.."
                                 title="Type id">
                         </div>
                     </div>
@@ -26,12 +26,12 @@
         </div>
         <form action="{{ route('storeattend') }}" method="post">
             @csrf
-            <input type="hidden" name="sec" value="{{ session()->get('sec') }}">
+            <input class="form-control" type="hidden" name="sec" value="{{ session()->get('sec') }}">
             @error('sec')
             <div class="text-danger font-weight-bold">*{{ $message }}</div>
             @enderror
             <center> <label for="start">Select date:</label>
-                <input type="date" id="start" name="date" value="{{ date('Y-m-d') }}">
+                <input type="date" id="start" class="form-control" name="date" value="{{ date('Y-m-d') }}">
                 @error('date')
                 <div class="text-danger font-weight-bold">*{{ $message }}</div>
                 @enderror
@@ -39,7 +39,7 @@
                 <div class="col-lg-6 flex" bis_skin_checked="1">
                     <label for="branche">Select branche:</label>
                     <div class="" tabindex="0" bis_skin_checked="1">
-                        <select name="branche" id="status" class="form-control">
+                        <select class="form-control" name="branche" id="status" class="form-control">
                             <option value="">NONE</option>
                             @foreach ($branches as $branche)
                             <option @selected($branche->id==(old('branche'))) value="{{ $branche->id }}"> {{ $branche->name }}
@@ -119,7 +119,7 @@
                         </td>
                         <td>
                             <div class="common_input mb_10" bis_skin_checked="1">
-                                <input type="text" value="{{ old('reset_'.$student->id) }}"
+                                <input class="form-control" type="text" value="{{ old('reset_'.$student->id) }}"
                                     name="reset_{{ $student->id }}" placeholder="reset" id="">
                                 @error('reset_' . $student->id)
                                 <div class="text-danger font-weight-bold">*{{ $message }}</div>

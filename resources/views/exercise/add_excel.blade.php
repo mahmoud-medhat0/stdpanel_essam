@@ -21,13 +21,15 @@
             <form action="{{ route('attend_store_excel') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row" bis_skin_checked="1">
-                    <div class="col-lg-6">
-                        <label for="start">Select date:</label>
-                        <input type="date" id="start" name="date" value="{{ date('Y-m-d') }}">
-                        @error('date')
-                        <div class="text-danger font-weight-bold">*{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <center>
+                        <div class="col-lg-6" bis_skin_checked="1">
+                            <label for="start">Select date:</label>
+                            <input type="date" id="start" class="form-control" name="date" value="{{ date('Y-m-d') }}">
+                            @error('date')
+                            <div class="text-danger font-weight-bold">*{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </center>
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="" tabindex="0" bis_skin_checked="1">
                             <label for="sec">secondary grade</label>
@@ -44,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6" bis_skin_checked="1">
-                        <div class="" tabindex="0" bis_skin_checked="1">
+                        <div class="" tabindex="1" bis_skin_checked="1">
                             <label for="Branch">Branch</label>
                             <select name="branch" id="status" class="form-control">
                                 <option value="">NONE</option>
@@ -60,9 +62,15 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        <div>
+                            <label for="maximum">maximum degree</label>
+                            <input type="text" name="maximum" class="form-control" placeholder="maximum degree">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class=" mb-0">
                             <label for="sheet">sheet</label>
-                            <input type="file" name="sheet" id="exampleFormControlFile1">
+                            <input type="file" class="form-control" name="sheet" id="exampleFormControlFile1">
                             @error('sheet')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror
@@ -71,7 +79,7 @@
                     <div class="col-12" bis_skin_checked="1">
                         <center>
                             <div class="create_report_btn mt_30" bis_skin_checked="1">
-                                <button class="btn_1 radius_btn d-block text-center">Add Exercise</button>
+                                <button class="btn_1 radius_btn d-block text-center">Add Exercise Record</button>
                             </div>
                         </center>
 
@@ -82,16 +90,4 @@
         </div>
     </div>
 </div>
-<script>
-    function myFunction(){
-        var input, filter, input1, tr, td, rnd, txtValue,str,str1;
-          input = document.getElementById("myInput");
-          input1 =document.getElementById("input1");
-          filter = input.value.toUpperCase();
-          str = input.value;
-          rnd = Math.floor(Math.random() * 100);
-          str1 = str.replaceAll(' ','_')+'_'+rnd;
-          input1.setAttribute('value',str1);
-    }
-</script>
 @endsection

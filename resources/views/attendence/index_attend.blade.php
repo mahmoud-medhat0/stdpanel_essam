@@ -1,5 +1,8 @@
 @extends('layouts.parent2')
-@section('title', 'List Of Attendence Boys')
+@section('title', 'List Of Attendence')
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 @include('messages.message')
 <div class="row">
@@ -12,89 +15,98 @@
                 <div class="white_box_tittle list_header" bis_skin_checked="1">
                     <h4>@yield('title')</h4>
                     <div class="box_right d-flex lms_block" bis_skin_checked="1">
-                        <div class="serach_field_2" bis_skin_checked="1">
-                            <div class="search_inner" bis_skin_checked="1">
-                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Date"
-                                    title="Type id">
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <table class="table table-responsive-xl" id="DataTables_Table_0">
-                    <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Branch</th>
-                            <th class="col">money</th>
-                            <th scope="col">date</th>
-                            <th class="col">created at</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($attendes as $attende)
-                        <tr class="alert" role="alert">
-                            <th>{{ $attende->id }}</th>
-                            <td>{{ $attende->name }}</td>
-                            <td>{{ $attende->money }}</td>
-                            <td>{{ $attende->date }}</td>
-                            <td>{{ $attende->created_at }}</td>
-                            <td>
-                                <div class="action_btns d-flex" bis_skin_checked="1">
-                                    <form action="{{ route('readattend',$attende->id) }}" method="get">
-                                        <button class="action_btn"><i class="far fa-edit"></i></button>
-                                    </form>
-                                    <form action="{{ route('attenddelete',$attende->id) }}" method="get">
-                                        <button class="action_btn"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Branch</th>
-                            <th class="col">money</th>
-                            <th scope="col">date</th>
-                            <th class="col">created at</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div id="printBar"></div>
+
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer" bis_skin_checked="1">
+                    <table class="table  dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid"
+                        aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Branch</th>
+                                <th class="col">money</th>
+                                <th scope="col">date</th>
+                                <th class="col">created at</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($attendes as $attende)
+                            <tr class="alert" role="alert">
+                                <th>{{ $attende->id }}</th>
+                                <td>{{ $attende->name }}</td>
+                                <td>{{ $attende->money }}</td>
+                                <td>{{ $attende->date }}</td>
+                                <td>{{ $attende->created_at }}</td>
+                                <td>
+                                    <div class="action_btns d-flex" bis_skin_checked="1">
+                                        <form action="{{ route('readattend',$attende->id) }}" method="get">
+                                            <button class="action_btn"><i class="far fa-edit"></i></button>
+                                        </form>
+                                        <form action="{{ route('attenddelete',$attende->id) }}" method="get">
+                                            <button class="action_btn"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Branch</th>
+                                <th class="col">money</th>
+                                <th scope="col">date</th>
+                                <th class="col">created at</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
     </center>
 </div>
-<script>
-    function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("DataTables_Table_0");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("tr")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-        th = table.getElementsByTagName("td");
-        for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
+@section('js')
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/buttons.colVis.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/bootstrap.daterangepicker/1/daterangepicker.js"></script>
+
+<script
+    src="https://cdn.datatables.net/s/bs-3.3.5/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-colvis-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0,r-2.0.0/datatables.min.js">
 </script>
+
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+
+<script>
+    $('#DataTables_Table_0 thead tr').clone(true).appendTo('#DataTables_Table_0 thead');
+        // $('#example1 thead tr').clone(true).appendTo('#example1 thead').css('display','none');
+        $('#DataTables_Table_0 thead tr:eq(1) th').each(function(i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" class="form-control form-control-sm" placeholder="' +
+                title + '" />');
+            $('input', this).on('keyup click change', function(e) {
+                e.stopPropagation();
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        })
+    var table = $("#DataTables_Table_0").DataTable({
+        responsive: false,
+        lengthChange: true,
+        autoWidth: false,
+        orderCellsTop: true,
+        paging:false,
+        buttons: ["excel"]
+    });
+    table.buttons().container().appendTo('#printBar');
+</script>
+@endsection
 @endsection

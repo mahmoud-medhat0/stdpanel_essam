@@ -20,7 +20,7 @@
                 <div class="row" bis_skin_checked="1">
                     <div class="col-lg-6" bis_skin_checked="1">
                         <div class="common_input mb_15" bis_skin_checked="1">
-                            <input name="name" value="{{ old('name') }}" onkeyup="myFunction()" id="myInput" type="text"
+                            <input class="form-control" name="name" value="{{ old('name') }}" onkeyup="myFunction()" id="myInput" type="text"
                                 placeholder="Name">
                             @error('name')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>

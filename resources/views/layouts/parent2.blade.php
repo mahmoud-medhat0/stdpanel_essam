@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
+    @yield('css')
     <link rel="icon" href="{{ asset('img/mini_logo1.png')}}')}}" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap1.min.css')}}">
@@ -170,11 +171,9 @@
                                         <h5>{{ Auth::guard('web')->user()->name }} </h5>
                                     </div>
                                     <div class="profile_info_details" bis_skin_checked="1">
-                                        <a href="#">My Profile </a>
-                                        <a href="#">Settings</a>
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <button type="submit">Logout</button>
+                                            <button class="form-control" type="submit">Logout</button>
                                         </form>
 
                                     </div>
@@ -252,7 +251,7 @@
 
     <script src="{{ asset('vendors/owl_carousel/js/owl.carousel.min.js')}}"></script>
 
-    <script src="{{ asset('vendors/datatable/js/jquery.dataTables.min.js')}}"></script>
+    {{-- <script src="{{ asset('vendors/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendors/datatable/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{ asset('vendors/datatable/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{ asset('vendors/datatable/js/buttons.flash.min.js')}}"></script>
@@ -261,10 +260,9 @@
     <script src="{{ asset('vendors/datatable/js/vfs_fonts.js')}}"></script>
     <script src="{{ asset('vendors/datatable/js/buttons.html5.min.js')}}"></script>
     <script src="{{ asset('vendors/datatable/js/buttons.print.min.js')}}"></script>
-
     <script src="{{ asset('vendors/datepicker/datepicker.js')}}"></script>
     <script src="{{ asset('vendors/datepicker/datepicker.en.js')}}"></script>
-    <script src="{{ asset('vendors/datepicker/datepicker.custom.js')}}"></script>
+    <script src="{{ asset('vendors/datepicker/datepicker.custom.js')}}"></script> --}}
     <script src="{{ asset('js/chart.min.js')}}"></script>
     <script src="{{ asset('vendors/chartjs/roundedBar.min.js')}}"></script>
 
@@ -278,8 +276,8 @@
     <script src="{{ asset('vendors/scroll/perfect-scrollbar.min.js')}}"></script>
     <script src="{{ asset('vendors/scroll/scrollable-custom.js')}}"></script>
 
-    <script src="{{ asset('vendors/apex_chart/apex-chart2.js')}}"></script>
-    <script src="{{ asset('vendors/apex_chart/apex_dashboard.js')}}"></script>
+    {{-- <script src="{{ asset('vendors/apex_chart/apex-chart2.js')}}"></script> --}}
+    {{-- <script src="{{ asset('vendors/apex_chart/apex_dashboard.js')}}"></script> --}}
 
     <script src="{{ asset('vendors/chart_am/core.js')}}"></script>
     <script src="{{ asset('vendors/chart_am/charts.js')}}"></script>
@@ -287,8 +285,9 @@
     <script src="{{ asset('vendors/chart_am/kelly.js')}}"></script>
     <script src="{{ asset('vendors/chart_am/chart-custom.js')}}"></script>
 
-    <script src="{{ asset('js/dashboard_init.js')}}"></script>
+    {{-- <script src="{{ asset('js/dashboard_init.js')}}"></script> --}}
     <script src="{{ asset('js/custom.js')}}"></script>
+    @yield('js')
     <svg id="SvgjsSvg1148" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"
         style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">

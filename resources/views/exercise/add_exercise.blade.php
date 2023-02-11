@@ -1,5 +1,5 @@
 @extends('layouts.parent2')
-@section('title', 'Add New Boys Exercise Record')
+@section('title', 'Add New Exercise Record')
 @section('content')
 @include('messages.message')
 <div class="col-12" bis_skin_checked="1">
@@ -33,7 +33,8 @@
                             <select name="branch" id="status" class="form-control">
                                 <option value="">NONE</option>
                                 @foreach ($branches as $branche)
-                                <option @selected($branche->id==(old('branch'))) value="{{ $branche->id }}"> {{ $branche->name }}
+                                <option @selected($branche->id==(old('branch'))) value="{{ $branche->id }}">
+                                    {{ $branche->name }}
                                 </option>
                                 @endforeach
                             </select>
@@ -42,6 +43,13 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label for="maximum">maximum degree</label>
+                            <input type="text" name="maximum" class="form-control" placeholder="maximum degree">
+                        </div>
+                    </div>
+
                 </center>
                 <table class="table lms_table_active dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid"
                     aria-describedby="DataTables_Table_0_info" style="width: 500px;">
@@ -63,7 +71,7 @@
                         <tr role="row" class="odd">
                             <th scope="row" tabindex="0" class="sorting_1"> <a
                                     href="{{ route('edit', $student->id) }}">{{ $student->id }}
-                                    <input type="hidden" name="id_{{ $student->id }}" value="{{ $student->id }}">
+                                    <input class="form-control" type="hidden" name="id_{{ $student->id }}" value="{{ $student->id }}">
                                     @error($student->id)
                                     <div class="text-danger font-weight-bold">*{{ $message }}</div>
                                     @enderror
@@ -71,7 +79,7 @@
                             <td>{{ $student->name }}</td>
                             <td>
                                 <div class="common_input mb_10" bis_skin_checked="1">
-                                    <input type="text" value="{{ old('degree_'.$student->id) }}"
+                                    <input class="form-control" type="text" value="{{ old('degree_'.$student->id) }}"
                                         name="degree_{{ $student->id }}" placeholder="degree" id="">
                                     @error('degree_' . $student->id)
                                     <div class="text-danger font-weight-bold">*{{ $message }}</div>
@@ -121,5 +129,4 @@
                       }
                     }
             </script>
-
             @endsection

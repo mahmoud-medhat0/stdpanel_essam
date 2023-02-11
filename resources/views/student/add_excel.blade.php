@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class=" mb-0">
-                            <input type="file" name="sheet" id="exampleFormControlFile1">
+                            <input class="form-control" type="file" name="sheet" id="exampleFormControlFile1">
                             @error('sheet')
                             <div class="text-danger font-weight-bold">*{{ $message }}</div>
                             @enderror

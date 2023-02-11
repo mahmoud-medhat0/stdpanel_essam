@@ -26,7 +26,8 @@ class exercisestore extends FormRequest
     {
         return [
             'date' => ['required', 'date'],
-            'branch'=>['required',new ValidBranch]
+            'branch'=>['required',new ValidBranch],
+            'maximum'=>['required','integer']
         ];
     }
 }
