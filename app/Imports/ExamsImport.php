@@ -8,20 +8,22 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class ExamsImport implements ToModel
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
-        return new exams([
-            'std_id'  => $row['std_id'],
-            'date' => request()->date,
-            'payed'=>$row['payed'],
-            'degree'=>$row['degree'],
-            'branch_id'=>request()->branch,
-            'sec_type_id'=>request()->sec,
-            'attend_record'=>session()->get('idrecord')
-        ]);
+        if ($row['std_id']) {
+            return new exams([
+                'std_id'  => $row['std_id'],
+                'date' => request()->date,
+                'payed' => $row['payed'],
+                'degree' => $row['degree'],
+                'branch_id' => request()->branch,
+                'sec_type_id' => request()->sec,
+                'attend_record' => session()->get('idrecord')
+            ]);
+        }
     }
 }
