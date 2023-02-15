@@ -146,7 +146,12 @@ class exercise extends Controller
         ]);
         $idrecord = ExerciseRecords::latest('created_at')->get()[0]->id;
         session()->flash('idrecord',$idrecord);
-        Excel::import(new ExerciseImport,request()->file('sheet'));
+        $importer = new ExerciseImport;
+        $importer->import(request()->file('sheet'));
+        if ($importer->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($importer->failures());
+        }
+        // Excel::import(new ExerciseImport,request()->file('sheet'));
         return redirect()->back()->with('success','Exercise Has Been Recorded Success');
     }
 }

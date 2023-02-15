@@ -179,8 +179,8 @@ class attendence extends Controller
     public function absent_all(absentall $req)
     {
         $id = session()->get('idrecord');
-        attend::where('attend_record',$id)->update([
-            'attendence'=>'2'
+        attend::where('attend_record', $id)->update([
+            'attendence' => '2'
         ]);
         return redirect()->route('attendlist')->with('success', 'absent set for all successfull');
     }
@@ -188,7 +188,7 @@ class attendence extends Controller
     {
         $secs = Sec_type::all();
         $branches = Branches::all();
-        return view('attendence.add_excel')->with('secs',$secs)->with('branches',$branches);
+        return view('attendence.add_excel')->with('secs', $secs)->with('branches', $branches);
     }
     public function attend_stamp()
     {
@@ -197,17 +197,21 @@ class attendence extends Controller
     public function store_excel(AttendenceSheetStore $request)
     {
         AttendRecord::create([
-            'date'=>$request['date'],
-            'Branch_id'=>$request['branch'],
-            'sec_id'=>$request['sec']
+            'date' => $request['date'],
+            'Branch_id' => $request['branch'],
+            'sec_id' => $request['sec']
         ]);
         $idrecord = AttendRecord::latest('created_at')->get()[0]->id;
-        session()->flash('idrecord',$idrecord);
-        Excel::import(new AttendenceImport,request()->file('sheet'));
-        $money = attend::where('attend_record',$idrecord)->sum('payed');
-        AttendRecord::where('id',$idrecord)->update([
-            'money'=>$money
+        session()->flash('idrecord', $idrecord);
+        $importer = new AttendenceImport;
+        $importer->import(request()->file('sheet'));
+        if ($importer->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($importer->failures());
+        }
+        $money = attend::where('attend_record', $idrecord)->sum('payed');
+        AttendRecord::where('id', $idrecord)->update([
+            'money' => $money
         ]);
-        return redirect()->back()->with('success','Attend Has Been Recorded Success');
+        return redirect()->back()->with('success', 'Attend Has Been Recorded Success');
     }
 }

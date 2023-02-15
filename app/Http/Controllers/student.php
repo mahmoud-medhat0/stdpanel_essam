@@ -131,7 +131,11 @@ class student extends Controller
             'sheet' => ['required', File::types(['xls', 'xlsx'])]
         ];
         request()->validate($validate);
-        Excel::import(new StudentdImport, request()->file('sheet'));
+        $importer = new StudentdImport;
+        $importer->import(request()->file('sheet'));
+        if ($importer->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($importer->failures());
+        }
         return redirect()->back()->with('success','Students added successfully');
     }
 }

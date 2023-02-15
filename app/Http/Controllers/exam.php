@@ -183,15 +183,21 @@ class exam extends Controller
             'date' => $request['date'],
             'Branch_id' => $request['branch'],
             'sec_id' => $request['sec'],
-            'maximum'=>$request['maximum']
+            'maximum' => $request['maximum']
         ]);
         $idrecord = ExamRecords::latest('created_at')->get()[0]->id;
         session()->flash('idrecord', $idrecord);
-        Excel::import(new ExamsImport, request()->file('sheet'));
+        $importer = new ExamsImport;
+        $importer->import(request()->file('sheet'));
+        if ($importer->failures()->isNotEmpty()) {
+            return redirect()->back()->withFailures($importer->failures());
+        }
+
+        // Excel::import(new ExamsImport, request()->file('sheet'));
         $money = exams::where('attend_record', $idrecord)->sum('payed');
         ExamRecords::where('id', $idrecord)->update([
             'money' => $money
         ]);
-        return redirect()->back()->with('success','Exam Has Been Recorded Success');
+        return redirect()->back()->with('success', 'Exam Has Been Recorded Success');
     }
 }

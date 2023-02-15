@@ -10,7 +10,8 @@
                     <h3 class="m-0">@yield('title')</h3>
                 </div>
                 <div>
-                    <a class="btn_1 radius_btn d-block text-center" href="{{ route('attend_stamp') }}">Download stamp</a>
+                    <a class="btn_1 radius_btn d-block text-center" href="{{ route('exercise_stamp') }}">Download
+                        stamp</a>
                 </div>
             </div>
         </div>
@@ -18,6 +19,37 @@
             @isset($success)
             {{ $success }}
             @endisset
+            @if (session()->has('failures'))
+            <table class="table table-danger">
+                <tr>
+                    <th>Row</th>
+                    <th>attribute</th>
+                    <th>Errors</th>
+                    <th>Value</th>
+                    @foreach (session()->get('failures') as $error)
+                <tr>
+                    <td>{{ $error->row() }}</td>
+                    <td>{{ $error->attribute() }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($error->errors() as $e)
+                            <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>{{ $error->values()[$error->attribute()] }}</td>
+                </tr>
+                @endforeach
+                </tr>
+            </table>
+            @endif
+            @if(isset($errors) && $errors->any())
+            @foreach ($errors as $error)
+            <div class="alert alert-danger">
+                {{ $error }}
+            </div>
+            @endforeach
+            @endif
             <form action="{{ route('attend_store_excel') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row" bis_skin_checked="1">
