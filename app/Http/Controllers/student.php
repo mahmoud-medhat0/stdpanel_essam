@@ -47,7 +47,7 @@ class student extends Controller
                 'name'=>['required','max:255'],
                 'username'=>['required','max:255','unique:students,username'],
                 'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students,phone'],
-                'p_phone'=>['required','regex:/^01[0-2,5]\d{8}$/'],
+                'p_phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/'],
                 'verified'=>['required','in:0,1'],
                 'password' => ['required','min:8', 'confirmed'],
                 'gender'=>['required','in:f,m'],
@@ -76,7 +76,7 @@ class student extends Controller
             'name'=>['required','max:255'],
             'username'=>['required','max:255','unique:students,username|exists:students,username'],
             'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students,phone|exists:students,phone'],
-            'p_phone'=>['required','regex:/^01[0-2,5]\d{8}$/'],
+            'p_phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/'],
             'verified'=>['required','in:0,1'],
             'gender'=>['required','in:f,m'],
             'sec'=>['required',new ValidSecType]

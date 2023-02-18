@@ -55,7 +55,7 @@ class StudentdImport implements
             '*.name' => ['required'],
             '*.username' => ['required', 'unique:students,username'],
             '*.password' => ['required', 'min:8'],
-            '*.phone' => ['required', 'unique:students,phone', 'max:11'],
+            '*.phone' => ['nullable', 'unique:students,phone', 'max:11'],
             '*.p_phone' => ['max:11'],
             '*.verified' => ['required', 'in:0,1'],
             '*.gender' => ['required', 'in:f,m']
