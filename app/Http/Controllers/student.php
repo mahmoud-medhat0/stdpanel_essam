@@ -109,7 +109,7 @@ class student extends Controller
                     'verified' => $request['verified'],
                 ]
             );
-            if(isset($request['password'])){
+            if($request['password']!=null){
                 $validate1 = array();
                 $validate1['password'] = ['password' => ['required','string', 'min:8', 'confirmed']];
                 $student->update(
