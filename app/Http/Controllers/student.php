@@ -83,7 +83,7 @@ class student extends Controller
         ];
         $request->validate($validate);
         $student = students::where('id',$request['id']);
-        $student = DB::table('students_m')->where('id','=',$request['id']);
+        $student = DB::table('students')->where('id','=',$request['id']);
             if($request['phone'] == null){
                 $phone = '*';
             }else{
