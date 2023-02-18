@@ -66,16 +66,25 @@ class student extends Controller
             ]);
         return redirect()->back()->with('success','Student Added Successfully');
     }
-    public function edit(Request $request){
-        $student = students::where('id',$request['id'])->get()[0];
+    public function edit($id){
+        $student = students::where('id',$id)->get()[0];
         $secs = Sec_type::all();
         return view('student.edit_student')->with('student',$student)->with('secs',$secs);
     }
     public function update (studentsupdateRequest $request){
+        $student = students::where('id',$request['id'])->get()[0];
+        if ($student->username != $request['username']) {
+            $validate['username'] =['required','max:255','unique:students,username'];
+        }else {
+            $validate['username']=['required','max:255','exists:students,username'];
+        }
+        if($student->phone != $request['phone']){
+            $validate['phone'] =['required','regex:/^01[0-2,5]\d{8}$/','unique:students,phone'];
+        }else {
+            $validate['phone'] =['nullable','regex:/^01[0-2,5]\d{8}$/','exists:students,phone'];
+        }
         $validate = [
             'name'=>['required','max:255'],
-            'username'=>['required','max:255','unique:students,username|exists:students,username'],
-            'phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/','unique:students,phone|exists:students,phone'],
             'p_phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/'],
             'verified'=>['required','in:0,1'],
             'gender'=>['required','in:f,m'],
@@ -109,7 +118,7 @@ class student extends Controller
                     ]
                     );
             }
-            return view('student.index_students',compact('students'))->with('success','Student '.$request['id'].' Data Updated Successfully');
+            return redirect()->back()->with('success','Student '.$request['id'].' Data Updated Successfully');
     }
     public function delete(Request $request){
         students::where('id',$request['id'])->delete();

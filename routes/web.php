@@ -65,7 +65,7 @@ Route::controller(attendence::class)->group(function(){
 Route::controller(student::class)->group(function () {
     Route::get('std/std', 'read')->name('std');
     Route::get('std/add', 'add')->name('add');
-    Route::post('std/edit/', 'edit')->name('edit');
+    Route::get('std/edit/{id}', 'edit')->name('edit');
     Route::put('std/update/', 'update')->name('update');
     Route::delete('std/delete/', 'delete')->name('delete');
     Route::post('store_std', 'store')->name('store_std');

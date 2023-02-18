@@ -76,10 +76,7 @@
                                 </td>
                                 <td>
                                     <div class="action_btns d-flex" bis_skin_checked="1">
-                                        <form action="{{ route('edit') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $student->id }}">
-                                            <input type="hidden" name="gender" value="m">
+                                        <form action="{{ route('edit',$student->id) }}" method="get">
                                             <button class="action_btn"><i class="far fa-edit"></i></button>
                                         </form>
                                         <form action="{{ route('delete') }}" method="post">
