@@ -75,7 +75,7 @@ class student extends Controller
         $validate = [
             'name'=>['required','max:255'],
             'username'=>['required','max:255','unique:students,username|exists:students,username'],
-            'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students,phone|exists:students,phone'],
+            'phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/','unique:students,phone|exists:students,phone'],
             'p_phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/'],
             'verified'=>['required','in:0,1'],
             'gender'=>['required','in:f,m'],
