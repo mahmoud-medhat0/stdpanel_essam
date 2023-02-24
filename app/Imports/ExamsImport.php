@@ -49,7 +49,7 @@ class ExamsImport implements
     public function rules(): array
     {
         return [
-            '*.std_id'=>['required','exists:students.id'],
+            '*.std_id'=>['required','exists:students,id'],
         ];
     }
     public function batchSize(): int

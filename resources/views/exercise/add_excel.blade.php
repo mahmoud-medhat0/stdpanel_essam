@@ -50,7 +50,7 @@
             </div>
             @endforeach
             @endif
-            <form action="{{ route('attend_store_excel') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('exercise_store_sheet') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row" bis_skin_checked="1">
                     <center>

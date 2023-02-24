@@ -43,7 +43,7 @@ WithValidation
     public function rules(): array
     {
         return [
-            '*.std_id'=>['required','exists:students.id'],
+            '*.std_id'=>['required','exists:students,id'],
             '*.attendence'=>['required','in:0,1,2'],
         ];
     }

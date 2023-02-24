@@ -30,7 +30,7 @@ class AttendenceSheetStore extends FormRequest
             'date'=>['required','date'],
             'sec'=>['required',new ValidSecType],
             'branch'=>['required',new ValidBranch],
-            'sheet'=>['required',File::types('xls','xlsx')]
+            'sheet'=>['required',File::types(['xls','xlsx'])]
         ];
     }
 }
