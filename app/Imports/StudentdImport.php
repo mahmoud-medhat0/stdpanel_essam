@@ -36,7 +36,7 @@ class StudentdImport implements
     public function model(array $row)
     {
         if ($row['name'] != null) {
-            return new students([
+            return students::create([
                 'name'  => $row['name'],
                 'username' => $row['username'],
                 'password' => Hash::make($row['password']),
@@ -52,7 +52,7 @@ class StudentdImport implements
     public function rules(): array
     {
         return [
-            '*.name' => ['required'],
+            '*.name' => ['required', 'max:100'],
             '*.username' => ['required', 'unique:students,username'],
             '*.password' => ['required', 'min:8'],
             '*.phone' => ['nullable', 'unique:students,phone', 'max:11'],

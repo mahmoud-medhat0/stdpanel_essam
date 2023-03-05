@@ -46,7 +46,7 @@ class student extends Controller
             $validate = [
                 'name'=>['required','max:255'],
                 'username'=>['required','max:255','unique:students,username'],
-                'phone'=>['regex:/^01[0-2,5]\d{8}$/','unique:students,phone'],
+                'phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/','unique:students,phone'],
                 'p_phone'=>['nullable','regex:/^01[0-2,5]\d{8}$/'],
                 'verified'=>['required','in:0,1'],
                 'password' => ['required','min:8', 'confirmed'],
@@ -79,7 +79,7 @@ class student extends Controller
             $validate['username']=['required','max:255','exists:students,username'];
         }
         if($student->phone != $request['phone']){
-            $validate['phone'] =['required','regex:/^01[0-2,5]\d{8}$/','unique:students,phone'];
+            $validate['phone'] =['nullable','regex:/^01[0-2,5]\d{8}$/','unique:students,phone'];
         }else {
             $validate['phone'] =['nullable','regex:/^01[0-2,5]\d{8}$/','exists:students,phone'];
         }
@@ -118,7 +118,7 @@ class student extends Controller
                     ]
                     );
             }
-            return redirect()->back()->with('success','Student '.$request['id'].' Data Updated Successfully');
+            return redirect()->route('read',$request->sec)->with('success','Student '.$request['id'].' Data Updated Successfully');
     }
     public function delete(Request $request){
         students::where('id',$request['id'])->delete();
