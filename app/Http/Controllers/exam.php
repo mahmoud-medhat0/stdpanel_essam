@@ -141,7 +141,7 @@ class exam extends Controller
                     $validate[$key] = 'required|max:20';
                     break;
                 case 'degree':
-                    $validate[$key] = 'required|int';
+                    $validate[$key] = 'nullable|double';
                     break;
             }
         }
@@ -194,7 +194,7 @@ class exam extends Controller
         }
 
         // Excel::import(new ExamsImport, request()->file('sheet'));
-        $money = exams::where('attend_record', $idrecord)->sum('payed');
+        $money = exams::where('exam_record', $idrecord)->sum('payed');
         ExamRecords::where('id', $idrecord)->update([
             'money' => $money
         ]);
