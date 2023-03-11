@@ -71,7 +71,7 @@ class exam extends Controller
                     }
                     break;
                 case 'degree':
-                    $validate[$key] = 'required|int';
+                    $validate[$key] = 'nullable|string';
                     break;
                 case 'payed':
                     $validate[$key] = 'required|max:20';
@@ -141,7 +141,7 @@ class exam extends Controller
                     $validate[$key] = 'required|max:20';
                     break;
                 case 'degree':
-                    $validate[$key] = 'nullable|double';
+                    $validate[$key] = 'nullable|string';
                     break;
             }
         }

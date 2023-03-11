@@ -52,7 +52,7 @@ class exercise extends Controller
                     }
                     break;
                 case 'degree':
-                    $validate[$key] = 'nullable|double';
+                    $validate[$key] = 'nullable|string';
                     break;
             }
         }
@@ -108,7 +108,7 @@ class exercise extends Controller
                     }
                     break;
                 case 'degree':
-                    $validate[$key] = 'required|int';
+                    $validate[$key] = 'nullable|string';
                     break;
             }
         }
