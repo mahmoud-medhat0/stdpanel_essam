@@ -101,7 +101,7 @@ class exam extends Controller
                 'std_id' => $value,
                 'date' => $req['date'],
                 'payed' => $req['payed_' . $value],
-                'degree' => $req['degree_' . $value],
+                'degree' => $req['degree_' . $value]!=null ? $req['degree_' . $value] : "*",
                 'branch_id' => $req['branche'],
                 'sec_type_id' => $sec,
                 'exam_record' => $ExamRecord
@@ -161,7 +161,7 @@ class exam extends Controller
         ]);
         foreach ($ids as $key => $value) {
             exams::where('std_id', $value)->where('exam_record', $id)->update([
-                'degree' => $req['degree_' . $value],
+                'degree' => $req['degree_' . $value]!=null ? $req['degree_' . $value] : "*",
                 'payed' => $req['payed_' . $value],
             ]);
         }

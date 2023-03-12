@@ -39,7 +39,7 @@ class ExamsImport implements
                 'std_id'  => $row['std_id'],
                 'date' => request()->date,
                 'payed' => $row['payed'],
-                'degree' => $row['degree'],
+                'degree' => $row['degree']!=null ? $row['degree'] : "*",
                 'branch_id' => request()->branch,
                 'sec_type_id' => request()->sec,
                 'attend_record' => session()->get('idrecord')

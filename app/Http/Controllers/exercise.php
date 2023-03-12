@@ -67,7 +67,7 @@ class exercise extends Controller
             ModelsExercise::create([
                 'std_id' => $value,
                 'date' => $req['date'],
-                'degree' => $req['degree_' . $value],
+                'degree' => $req['degree_' . $value]!=null ? $req['degree_' . $value] : "*",
                 'branch_id' => $req['branch'],
                 'sec_type_id' => $sec,
                 'Exercise_Record' => $ExerciseRecord
@@ -115,7 +115,7 @@ class exercise extends Controller
         $req->validate($validate);
         foreach ($ids as $key => $value) {
             ModelsExercise::where('std_id', $value)->where('Exercise_Record', $id)->update([
-                'degree' => $req['degree_' . $value],
+                'degree' => $req['degree_' . $value]!=null ? $req['degree_' . $value] : "*",
             ]);
         }
         return redirect()->route('exerciselist')->with('success', 'The Exam Record (' . $id . ') updated Successfully')->withInput();

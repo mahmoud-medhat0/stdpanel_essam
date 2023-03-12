@@ -37,7 +37,7 @@ class ExerciseImport implements
             return new exercise([
                 'std_id'  => $row['std_id'],
                 'date' => request()->date,
-                'degree' => $row['degree'],
+                'degree' => $row['degree']!=null ? $row['degree'] : "*",
                 'branch_id' => request()->branch,
                 'sec_type_id' => request()->sec,
                 'Exercise_Record' => session()->get('idrecord')
