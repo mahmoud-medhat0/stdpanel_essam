@@ -35,6 +35,7 @@ class ExamsImport implements
     public function model(array $row)
     {
         if ($row['std_id'] != null) {
+            dd($row);
             return new exams([
                 'std_id'  => $row['std_id'],
                 'date' => request()->date,
@@ -59,5 +60,9 @@ class ExamsImport implements
     public function chunkSize(): int
     {
         return 1000;
+    }
+    public function headingValidation(): bool
+    {
+        return true;
     }
 }
