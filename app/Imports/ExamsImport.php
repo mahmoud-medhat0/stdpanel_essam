@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\exams;
+use Exception;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -35,16 +36,19 @@ class ExamsImport implements
     public function model(array $row)
     {
         if ($row['std_id'] != null) {
-            dd($row);
-            return new exams([
-                'std_id'  => $row['std_id'],
-                'date' => request()->date,
-                'payed' => $row['payed'],
-                'degree' => $row['degree']!=null ? $row['degree'] : "*",
-                'branch_id' => request()->branch,
-                'sec_type_id' => request()->sec,
-                'attend_record' => session()->get('idrecord')
-            ]);
+            try {
+                return new exams([
+                    'std_id'  => $row['std_id'],
+                    'date' => request()->date,
+                    'payed' => $row['payed'],
+                    'degree' => $row['degree']!=null ? $row['degree'] : "*",
+                    'branch_id' => request()->branch,
+                    'sec_type_id' => request()->sec,
+                    'attend_record' => session()->get('idrecord')
+                ]);
+            } catch (Exception $th) {
+                dd($th);
+            }
         }
     }
     public function rules(): array
