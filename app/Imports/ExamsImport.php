@@ -50,7 +50,7 @@ class ExamsImport implements
                     'degree' => $row['degree']!=null ? $row['degree'] : "*",
                     'branch_id' => request()->branch,
                     'sec_type_id' => request()->sec,
-                    'attend_record' => $this->idrecord
+                    'exam_record' => $this->idrecord
                 ]);
             } catch (Exception $th) {
                 dd($th);
