@@ -186,7 +186,6 @@ class exam extends Controller
             'maximum' => $request['maximum']
         ]);
         $idrecord = ExamRecords::latest('created_at')->get()[0]->id;
-        session()->put('idrecord', $idrecord);
         $importer = new ExamsImport;
         $importer->import(request()->file('sheet'));
         if ($importer->failures()->isNotEmpty()) {

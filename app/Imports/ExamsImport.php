@@ -2,8 +2,9 @@
 
 namespace App\Imports;
 
-use App\Models\exams;
 use Exception;
+use App\Models\exams;
+use App\Models\ExamRecords;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -28,11 +29,16 @@ class ExamsImport implements
 {
     use Importable, SkipsErrors, SkipsFailures;
 
+    public $idrecord;
     /**
      * @param array $row
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+    public function __construct()
+    {
+        $this->idrecord = ExamRecords::latest('created_at')->get()[0]->id;
+    }
     public function model(array $row)
     {
         if ($row['std_id'] != null) {
@@ -44,7 +50,7 @@ class ExamsImport implements
                     'degree' => $row['degree']!=null ? $row['degree'] : "*",
                     'branch_id' => request()->branch,
                     'sec_type_id' => request()->sec,
-                    'attend_record' => session()->get('idrecord')
+                    'attend_record' => $this->idrecord
                 ]);
             } catch (Exception $th) {
                 dd($th);
