@@ -37,7 +37,7 @@ class ExamsImport implements
     {
         if ($row['std_id'] != null) {
             try {
-                return new exams([
+                return exams::create([
                     'std_id'  => $row['std_id'],
                     'date' => request()->date,
                     'payed' => $row['payed'],
