@@ -43,14 +43,11 @@ class ExamsImport implements
     {
         if ($row['std_id'] != null) {
             try {
-                if ($row['degree']=='0') {
-                    dd($row['degree']);
-                }
                 return exams::create([
                     'std_id'  => $row['std_id'],
                     'date' => request()->date,
                     'payed' => $row['payed'],
-                    'degree' => $row['degree']!=null ? $row['degree'] : "*",
+                    'degree' => $row['degree']!=null || $row['degree'] =='0' ? $row['degree'] : "*",
                     'branch_id' => request()->branch,
                     'sec_type_id' => request()->sec,
                     'exam_record' => $this->idrecord
